@@ -1,0 +1,28 @@
+﻿<Window x:Class="PlexusWPF.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="About" Height="200" Width="300"
+    WindowStyle="ToolWindow" ShowInTaskbar="False" WindowStartupLocation="CenterScreen">
+    <Grid Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center">
+            <Hyperlink TextDecorations="" NavigateUri="http://eplexus">
+                <Image Grid.Row="0" Stretch="None" Source="Images/logo.jpg"/>
+            </Hyperlink>
+        </TextBlock>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Padding="0,8,0,8" HorizontalAlignment="Center">
+                Credits to 
+                <Hyperlink NavigateUri="mailto:alain.lye@plexus.com" RequestNavigate="Hyperlink_RequestNavigate">alain.lye@plexus.com</Hyperlink>
+                <Hyperlink NavigateUri="mailto:bp.gooi@plexus.com" RequestNavigate="Hyperlink_RequestNavigate">bp.gooi@plexus.com</Hyperlink>
+                <Hyperlink NavigateUri="mailto:lc.ho@plexus.com" RequestNavigate="Hyperlink_RequestNavigate">lc.ho@plexus.com</Hyperlink>
+                <Hyperlink NavigateUri="mailto:yeang-shing.then@plexus.com" RequestNavigate="Hyperlink_RequestNavigate">yeang-shing.then@plexus.com</Hyperlink>
+        </TextBlock>
+        <Label Grid.Row="2" HorizontalAlignment="Center" Margin="0" Padding="0">Last build on 18th Aug 2009</Label>
+        <Label Grid.Row="3" HorizontalAlignment="Center" Margin="0" Padding="0">Copyright © 2009 by Plexus</Label>
+    </Grid>
+</Window>

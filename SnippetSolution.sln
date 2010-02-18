@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippet", "Snippet\Snippet.csproj", "{B0B0829A-63CE-4625-B8D7-609189B6AC65}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A08F599D-BB54-4D2C-8E56-9B71600E9CF7}"
+	ProjectSection(SolutionItems) = preProject
+		Libraries\antlr.runtime.dll = Libraries\antlr.runtime.dll
+		Libraries\DDay.iCal.dll = Libraries\DDay.iCal.dll
+		Libraries\itextsharp.dll = Libraries\itextsharp.dll
+		Libraries\log4net.dll = Libraries\log4net.dll
+		Libraries\Microsoft.Office.Interop.Outlook.dll = Libraries\Microsoft.Office.Interop.Outlook.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelDiff", "ExcelDiff\ExcelDiff.csproj", "{FF8688B4-C43F-494C-9763-1BC2EE5A7560}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|.NET = Release|.NET
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Release|.NET.ActiveCfg = Release|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B0B0829A-63CE-4625-B8D7-609189B6AC65}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Release|.NET.ActiveCfg = Release|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FF8688B4-C43F-494C-9763-1BC2EE5A7560}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Release|.NET.ActiveCfg = Release|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CE3FDC06-0137-42B6-BDC8-F6A37F37A1B3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

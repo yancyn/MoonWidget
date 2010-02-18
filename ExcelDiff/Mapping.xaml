@@ -1,0 +1,50 @@
+﻿<Window x:Class="PlexusWPF.Mapping"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="Window_Loaded"
+    Title="Mapping" Height="300" Width="300" WindowStartupLocation="CenterScreen">
+    <DockPanel LastChildFill="True">
+
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <WrapPanel Grid.Row="0">
+                <Label Width="80">Value1</Label>
+                <TextBox x:Name="Value1" Width="170"/>
+            </WrapPanel>
+            <WrapPanel Grid.Row="1">
+                <Label Width="80">Value2</Label>
+                <TextBox x:Name="Value2" Width="170"/>
+                <Button x:Name="Add" ToolTip="Add" Margin="4,0,0,0">
+                    <Image Width="16" Height="16" Source="Images/add.png"/>
+                </Button>
+            </WrapPanel>
+            <WrapPanel Grid.Row="2">
+                <Label Width="80">Search</Label>
+                <TextBox x:Name="Keyword" Width="170"/>
+                <Button x:Name="Search" ToolTip="Search" Margin="4,0,0,0">
+                    <Image Width="16" Height="16" Source="Images/search.png"/>
+                </Button>
+            </WrapPanel>
+        </Grid>
+
+        <WrapPanel>
+            <ListView x:Name="listView1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Value1" />
+                        <GridViewColumn Header="Value2" />
+                        <GridViewColumn>
+                            <Button x:Name="Remove" ToolTip="Remove">
+                                <Image Width="16" Height="16" Source="Images/cross.png"/>
+                            </Button>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </WrapPanel>
+    </DockPanel>
+</Window>
