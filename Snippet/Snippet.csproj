@@ -119,6 +119,7 @@
       </SubType>
     </None>
     <Compile Include="QuerySender.cs" />
+    <Compile Include="RenameFiler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">

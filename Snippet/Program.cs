@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Data;
 
 namespace Snippet
 {
@@ -19,6 +20,14 @@ namespace Snippet
             //tracker#10712 - Master Item owned by lc.ho@plexus.com
             //ExcelWrapper wrapper = new ExcelWrapper();
             //wrapper.Execute();
+
+            //100218tys
+            RenameFiler filer = new RenameFiler(@"F:\JawiName");
+            //filer.Destination = @"G:\Backups\JawiLib2";
+            //filer.Rename();
+            DataSet dataSet = new DataSet();
+            dataSet.Tables.Add(filer.GetFileInfo());
+            dataSet.WriteXml("result.xml");
         }
         /// <summary>
         /// Return date time from a timestamp value of UNIX or Oracle
