@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
+using System.Linq;
+using System.IO;
 
 namespace Snippet
 {
@@ -22,13 +24,14 @@ namespace Snippet
             //wrapper.Execute();
 
             //100218tys
-            RenameFiler filer = new RenameFiler(@"F:\JawiName");
+            //RenameFiler filer = new RenameFiler(@"F:\JawiName");
             //filer.Destination = @"G:\Backups\JawiLib2";
             //filer.Rename();
-            DataSet dataSet = new DataSet();
-            dataSet.Tables.Add(filer.GetFileInfo());
-            dataSet.WriteXml("result.xml");
+            //DataSet dataSet = new DataSet();
+            //dataSet.Tables.Add(filer.GetFileInfo());
+            //dataSet.WriteXml("result.xml");
         }
+
         /// <summary>
         /// Return date time from a timestamp value of UNIX or Oracle
         /// </summary>
