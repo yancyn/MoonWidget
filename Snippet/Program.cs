@@ -30,6 +30,20 @@ namespace Snippet
             //DataSet dataSet = new DataSet();
             //dataSet.Tables.Add(filer.GetFileInfo());
             //dataSet.WriteXml("result.xml");
+
+            //20100223tys
+            WordScales wordScales = new WordScales();
+            wordScales.Option = WordScalesOption.Word;
+
+            string content = string.Empty;
+            DirectoryInfo directoryInfo = new DirectoryInfo(@"F:\jawiname");
+            FileInfo[] files = directoryInfo.GetFiles();
+            foreach (FileInfo file in files)
+                content += file.Name.ToLower() + " ";
+            //StreamReader streamReader = new StreamReader("doc.txt");
+            wordScales.Count(content);
+            foreach (KeyValuePair<string, int> item in wordScales.Result)
+                Console.WriteLine("{0}\t{1}", item.Key, item.Value);
         }
 
         /// <summary>

@@ -121,6 +121,7 @@
     </None>
     <Compile Include="QuerySender.cs" />
     <Compile Include="RenameFiler.cs" />
+    <Compile Include="WordScales.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">
