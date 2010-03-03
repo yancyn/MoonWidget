@@ -1,9 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
 using System.Linq;
 using System.IO;
+using System.Text;
+using System.Globalization;
 
 namespace Snippet
 {

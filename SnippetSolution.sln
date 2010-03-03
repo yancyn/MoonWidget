@@ -20,7 +20,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magnum", "Magnum\Magnum.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardVisualizer", "KeyboardVisualizer\KeyboardVisualizer.csproj", "{64EF6AB2-9799-43B9-98C7-7D0B883644B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippet.Test", "Snippet.Test\Snippet.Test.csproj", "{962F2D14-D5F7-4F53-8266-88E1F3F00275}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{673A27A0-778B-432B-B2AE-ECF776AC8123}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		SnippetSolution.vsmdi = SnippetSolution.vsmdi
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SnippetSolution.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +90,16 @@ Global
 		{64EF6AB2-9799-43B9-98C7-7D0B883644B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64EF6AB2-9799-43B9-98C7-7D0B883644B8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{64EF6AB2-9799-43B9-98C7-7D0B883644B8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Release|.NET.ActiveCfg = Release|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Release|Any CPU.Build.0 = Release|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{962F2D14-D5F7-4F53-8266-88E1F3F00275}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
