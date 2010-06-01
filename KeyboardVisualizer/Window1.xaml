@@ -5,5 +5,6 @@
     <Grid>
         <TextBox Margin="26,18,132,0" Name="textBox1" Height="23" VerticalAlignment="Top" />
         <TextBlock Height="21" Margin="35,92,123,0" Name="textBlock1" VerticalAlignment="Top" />
+        <Button Height="23" Margin="0,18,12,0" Name="button1" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="button1_Click">Button</Button>
     </Grid>
 </Window>
