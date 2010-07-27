@@ -46,6 +46,10 @@ namespace Snippet
             //wordScales.Count(content);
             //foreach (KeyValuePair<string, int> item in wordScales.Result)
             //    Console.WriteLine("{0}\t{1}", item.Key, item.Value);
+
+            //20100721
+            CharacterFrequency characterFinder = new CharacterFrequency("sms.txt");
+            characterFinder.PrintOutput();
         }
 
         /// <summary>
