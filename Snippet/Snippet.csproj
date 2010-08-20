@@ -122,6 +122,7 @@
     </None>
     <Compile Include="QuerySender.cs" />
     <Compile Include="RenameFiler.cs" />
+    <Compile Include="SourceCounter.cs" />
     <Compile Include="WordScales.cs" />
   </ItemGroup>
   <ItemGroup>
