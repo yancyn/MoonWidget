@@ -48,8 +48,16 @@ namespace Snippet
             //    Console.WriteLine("{0}\t{1}", item.Key, item.Value);
 
             //20100721
-            CharacterFrequency characterFinder = new CharacterFrequency("sms.txt");
-            characterFinder.PrintOutput();
+            //CharacterFrequency characterFinder = new CharacterFrequency("sms.txt");
+            //characterFinder.PrintOutput();
+
+            //2010-08-24
+            SourceCounter counter = new SourceCounter(@"G:\My Projects\LeanQS\src\LeanQualityTool");
+            counter.SetSkipFolder(new string[] { ".svn", "obj", "bin", "Properties" });
+            counter.SetSkipExtension(new string[] { ".csproj" });
+            counter.Start();
+            foreach (SourceFile item in counter.Items)
+                System.Diagnostics.Debug.WriteLine(String.Format("{0}\t{1}", item.Name, item.TotalLines));
         }
 
         /// <summary>
