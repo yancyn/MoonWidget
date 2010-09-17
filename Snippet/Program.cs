@@ -33,31 +33,17 @@ namespace Snippet
             //dataSet.Tables.Add(filer.GetFileInfo());
             //dataSet.WriteXml("result.xml");
 
-            //20100223tys
-            //WordScales wordScales = new WordScales();
-            //wordScales.Option = WordScalesOption.Word;
-
-            //string content = string.Empty;
-            //DirectoryInfo directoryInfo = new DirectoryInfo(@"F:\jawiname");
-            //FileInfo[] files = directoryInfo.GetFiles();
-            //foreach (FileInfo file in files)
-            //    content += file.Name.ToLower() + " ";
-            ////StreamReader streamReader = new StreamReader("doc.txt");
-            //wordScales.Count(content);
-            //foreach (KeyValuePair<string, int> item in wordScales.Result)
-            //    Console.WriteLine("{0}\t{1}", item.Key, item.Value);
-
             //20100721
             //CharacterFrequency characterFinder = new CharacterFrequency("sms.txt");
             //characterFinder.PrintOutput();
 
             //2010-08-24
-            SourceCounter counter = new SourceCounter(@"G:\My Projects\LeanQS\src\LeanQualityTool");
-            counter.SetSkipFolder(new string[] { ".svn", "obj", "bin", "Properties" });
-            counter.SetSkipExtension(new string[] { ".csproj" });
-            counter.Start();
-            foreach (SourceFile item in counter.Items)
-                System.Diagnostics.Debug.WriteLine(String.Format("{0}\t{1}", item.Name, item.TotalLines));
+            //SourceCounter counter = new SourceCounter(@"G:\My Projects\LeanQS\src\LeanQualityTool");
+            //counter.SetSkipFolder(new string[] { ".svn", "obj", "bin", "Properties" });
+            //counter.SetSkipExtension(new string[] { ".csproj" });
+            //counter.Start();
+            //foreach (SourceFile item in counter.Items)
+            //    System.Diagnostics.Debug.WriteLine(String.Format("{0}\t{1}", item.Name, item.TotalLines));
         }
 
         /// <summary>
