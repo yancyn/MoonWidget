@@ -1,0 +1,16 @@
+<xml>
+<countries>
+<country id="cn">
+	<name>China</name>
+</country>
+<country id="my">
+	<name>Malaysia</name>
+</country>
+<country id="ca">
+	<name>Canada</name>
+</country>
+<country id="us">
+	<name>United States</name>
+</country>
+</countries>
+</xml>
