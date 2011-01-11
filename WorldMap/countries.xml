@@ -1,16 +1,39 @@
+
 <xml>
-<countries>
-<country id="cn">
-	<name>China</name>
-</country>
-<country id="my">
-	<name>Malaysia</name>
-</country>
-<country id="ca">
-	<name>Canada</name>
-</country>
-<country id="us">
-	<name>United States</name>
-</country>
-</countries>
+    <!--
+    population in million unit
+    area in km² unit
+    -->
+    <countries>
+        <country id="ad">
+            <name>Andorra</name>
+            <population>0.084</population>
+            <area>468</area>
+        </country>
+        <country id="ae">
+            <name>United Arab Emirates</name>
+            <population>4.7</population>
+            <area>83k</area>
+        </country>
+        <country id="cn">
+            <name>China</name>
+            <population>1341</population>
+            <area>9326k</area>
+        </country>
+        <country id="us">
+            <name>United States</name>
+            <population>310</population>
+            <area>9161k</area>
+        </country>
+        <country id="my">
+            <name>Malaysia</name>
+            <population>28</population>
+            <area>328k</area>
+        </country>
+        <country id="ca">
+            <name>Canada</name>
+            <population>34</population>
+            <area>9093k</area>
+        </country>
+    </countries>
 </xml>
