@@ -73,12 +73,6 @@
     <Compile Include="frmDataView.Designer.cs">
       <DependentUpon>frmDataView.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMuslimCalendar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMuslimCalendar.Designer.cs">
-      <DependentUpon>frmMuslimCalendar.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmPing.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,10 +96,6 @@
     <EmbeddedResource Include="frmDataView.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmDataView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMuslimCalendar.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmMuslimCalendar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPing.resx">
       <SubType>Designer</SubType>
