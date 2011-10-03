@@ -47,6 +47,7 @@ namespace Snippet
             //foreach (SourceFile item in counter.Items)
             //    System.Diagnostics.Debug.WriteLine(String.Format("{0}\t{1}", item.Name, item.TotalLines));
 
+            //requested by Nikki 2011-10-03
             sb = new StringBuilder();
             SnapshotFolder(0, ConfigurationSettings.AppSettings["snapshot_uri"]);
             StreamWriter writer = new StreamWriter("snapshot.txt");
