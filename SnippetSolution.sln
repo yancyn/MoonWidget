@@ -1,8 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippet", "Snippet\Snippet.csproj", "{B0B0829A-63CE-4625-B8D7-609189B6AC65}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{A08F599D-BB54-4D2C-8E56-9B71600E9CF7}"
 	ProjectSection(SolutionItems) = preProject
 		Libraries\antlr.runtime.dll = Libraries\antlr.runtime.dll
@@ -11,6 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 		Libraries\log4net.dll = Libraries\log4net.dll
 		Libraries\Microsoft.Office.Interop.Outlook.dll = Libraries\Microsoft.Office.Interop.Outlook.dll
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{673A27A0-778B-432B-B2AE-ECF776AC8123}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippet", "Snippet\Snippet.csproj", "{B0B0829A-63CE-4625-B8D7-609189B6AC65}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelDiff", "ExcelDiff\ExcelDiff.csproj", "{FF8688B4-C43F-494C-9763-1BC2EE5A7560}"
 EndProject
@@ -21,11 +26,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardVisualizer", "KeyboardVisualizer\KeyboardVisualizer.csproj", "{64EF6AB2-9799-43B9-98C7-7D0B883644B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snippet.Test", "Snippet.Test\Snippet.Test.csproj", "{962F2D14-D5F7-4F53-8266-88E1F3F00275}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{673A27A0-778B-432B-B2AE-ECF776AC8123}"
-	ProjectSection(SolutionItems) = preProject
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keyboard.Test", "Keyboard.Test\Keyboard.Test.csproj", "{BEEED3B3-5101-4BF2-AC1E-83D6077E43D5}"
 EndProject

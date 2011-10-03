@@ -6,11 +6,13 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Globalization;
+using System.Configuration;
 
 namespace Snippet
 {
     static class Program
     {
+        static StringBuilder sb;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -44,6 +46,12 @@ namespace Snippet
             //counter.Start();
             //foreach (SourceFile item in counter.Items)
             //    System.Diagnostics.Debug.WriteLine(String.Format("{0}\t{1}", item.Name, item.TotalLines));
+
+            sb = new StringBuilder();
+            SnapshotFolder(0, ConfigurationSettings.AppSettings["snapshot_uri"]);
+            StreamWriter writer = new StreamWriter("snapshot.txt");
+            writer.Write(sb.ToString());
+            writer.Close();
         }
 
         /// <summary>
@@ -59,6 +67,28 @@ namespace Snippet
         {
             DateTime result = new DateTime(1970, 1, 1);
             return result.AddSeconds(timestamp);
+        }
+        private static void PrintFiles(int indent, DirectoryInfo info)
+        {
+            string tab = "|-";
+            for (int i = 0; i < indent; i++)
+                tab += "-";
+            sb.AppendLine(string.Format(tab + "[{0}]", info.FullName));
+            //System.Diagnostics.Debug.WriteLine(string.Format(tab + "[{0}]", info.FullName));//info.Name
+
+            foreach (FileInfo fileInfo in info.GetFiles())
+                sb.AppendLine(tab + fileInfo.Name);
+                //System.Diagnostics.Debug.WriteLine(tab + fileInfo.Name);
+            foreach (DirectoryInfo directoryInfo in info.GetDirectories())
+                PrintFiles(indent++, directoryInfo);
+        }
+        private static void SnapshotFolder(int indent, string path)
+        {
+            sb.AppendLine(string.Format("[{0}]", path));
+            //System.Diagnostics.Debug.WriteLine(string.Format("[{0}]", path));
+            DirectoryInfo info = new DirectoryInfo(path);
+            foreach (DirectoryInfo directoryInfo in info.GetDirectories())
+                PrintFiles(indent++, directoryInfo);
         }
     }
 }
