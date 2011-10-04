@@ -48,11 +48,8 @@ namespace Snippet
             //    System.Diagnostics.Debug.WriteLine(String.Format("{0}\t{1}", item.Name, item.TotalLines));
 
             //requested by Nikki 2011-10-03
-            sb = new StringBuilder();
-            SnapshotFolder(0, ConfigurationSettings.AppSettings["snapshot_uri"]);
-            StreamWriter writer = new StreamWriter("snapshot.txt");
-            writer.Write(sb.ToString());
-            writer.Close();
+            FolderPrinter printer = new FolderPrinter();
+            printer.Lookup(0, ConfigurationSettings.AppSettings["snapshot_uri"]);
         }
 
         /// <summary>
@@ -68,28 +65,6 @@ namespace Snippet
         {
             DateTime result = new DateTime(1970, 1, 1);
             return result.AddSeconds(timestamp);
-        }
-        private static void PrintFiles(int indent, DirectoryInfo info)
-        {
-            string tab = "|-";
-            for (int i = 0; i < indent; i++)
-                tab += "-";
-            sb.AppendLine(string.Format(tab + "[{0}]", info.FullName));
-            //System.Diagnostics.Debug.WriteLine(string.Format(tab + "[{0}]", info.FullName));//info.Name
-
-            foreach (FileInfo fileInfo in info.GetFiles())
-                sb.AppendLine(tab + fileInfo.Name);
-                //System.Diagnostics.Debug.WriteLine(tab + fileInfo.Name);
-            foreach (DirectoryInfo directoryInfo in info.GetDirectories())
-                PrintFiles(indent++, directoryInfo);
-        }
-        private static void SnapshotFolder(int indent, string path)
-        {
-            sb.AppendLine(string.Format("[{0}]", path));
-            //System.Diagnostics.Debug.WriteLine(string.Format("[{0}]", path));
-            DirectoryInfo info = new DirectoryInfo(path);
-            foreach (DirectoryInfo directoryInfo in info.GetDirectories())
-                PrintFiles(indent++, directoryInfo);
         }
     }
 }
