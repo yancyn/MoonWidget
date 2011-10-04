@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 
@@ -59,6 +57,10 @@ namespace Snippet
             try
             {
                 DirectoryInfo info = new DirectoryInfo(path);
+                foreach (FileInfo fileInfo in info.GetFiles())
+                    sb.AppendLine(fileInfo.Name);
+                //System.Diagnostics.Debug.WriteLine(tab + fileInfo.Name);
+
                 foreach (DirectoryInfo directoryInfo in info.GetDirectories())
                     Print(indent++, directoryInfo);
             }
