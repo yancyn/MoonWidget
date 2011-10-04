@@ -31,11 +31,19 @@ namespace Snippet
             sb.AppendLine(string.Format(tab + "[{0}]", info.FullName));
             //System.Diagnostics.Debug.WriteLine(string.Format(tab + "[{0}]", info.FullName));//info.Name
 
-            foreach (FileInfo fileInfo in info.GetFiles())
-                sb.AppendLine(tab + fileInfo.Name);
-            //System.Diagnostics.Debug.WriteLine(tab + fileInfo.Name);
-            foreach (DirectoryInfo directoryInfo in info.GetDirectories())
-                Print(indent++, directoryInfo);
+            try
+            {
+                foreach (FileInfo fileInfo in info.GetFiles())
+                    sb.AppendLine(tab + fileInfo.Name);
+                //System.Diagnostics.Debug.WriteLine(tab + fileInfo.Name);
+                foreach (DirectoryInfo directoryInfo in info.GetDirectories())
+                    Print(indent++, directoryInfo);
+            }
+            catch (System.UnauthorizedAccessException ex)
+            {
+                sb.AppendLine("... no permission");
+                return;
+            }
         }
         private void Print()
         {
@@ -64,9 +72,10 @@ namespace Snippet
                 foreach (DirectoryInfo directoryInfo in info.GetDirectories())
                     Print(indent++, directoryInfo);
             }
-            catch (System.Security.SecurityException ex)
+            //catch (System.Security.SecurityException ex)
+            catch (System.UnauthorizedAccessException ex)
             {
-                sb.Append("... no permission");
+                sb.AppendLine("... no permission");
                 return;
             }
 
