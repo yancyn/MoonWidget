@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!--  Book  -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <xsd:complexType name="Book">
+    <xsd:sequence>
+      <xsd:element name="ISBN" type="xsd:string"/><!-- @todo: validate ISBN format? -->
+      <xsd:element name="Title" type="xsd:string"/>
+      <xsd:element name="Author" type="xsd:string"/>
+      <xsd:element name="Publisher" type="xsd:string"/>
+      <xsd:element name="PublishedDate" type="xsd:date"/>
+      <xsd:element name="TotalPage" type="xsd:int"/>
+      <xsd:element name="Price" type="xsd:decimal"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!--  Element  -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <xsd:element name="Book" type="Book"/>
+</xsd:schema>

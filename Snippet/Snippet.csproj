@@ -107,7 +107,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmReadvmg.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Company.xsd">
       <SubType>
       </SubType>
@@ -115,6 +117,9 @@
     <Compile Include="QuerySender.cs" />
     <Compile Include="RenameFiler.cs" />
     <Compile Include="SourceCounter.cs" />
+    <None Include="DataModal\book.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">
