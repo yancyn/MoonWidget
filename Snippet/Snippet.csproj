@@ -110,7 +110,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Company.xsd">
+    <None Include="DataModal\Company.xsd">
       <SubType>
       </SubType>
     </None>

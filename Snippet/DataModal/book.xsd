@@ -5,13 +5,14 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <xsd:complexType name="Book">
     <xsd:sequence>
-      <xsd:element name="ISBN" type="xsd:string"/><!-- @todo: validate ISBN format? -->
+      <xsd:element name="ISBN" type="ISBN"/>
       <xsd:element name="Title" type="xsd:string"/>
       <xsd:element name="Author" type="xsd:string"/>
       <xsd:element name="Publisher" type="xsd:string"/>
       <xsd:element name="PublishedDate" type="xsd:date"/>
       <xsd:element name="TotalPage" type="xsd:int"/>
       <xsd:element name="Price" type="xsd:decimal"/>
+      <!-- @todo: Add cover information -->
     </xsd:sequence>
   </xsd:complexType>
 
@@ -19,4 +20,19 @@
   <!--  Element  -->
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
   <xsd:element name="Book" type="Book"/>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!--  Type  -->
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- @see http://agilior.pt/blogs/rodrigo.guerreiro/archive/2008/11/14/5965.aspx -->
+  <xsd:simpleType name="ISBN">
+    <xsd:annotation>
+      <xsd:documentation>
+        International Standard Book Number format. 13 digit ie. 978-0-596-52773-0
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="\d{3}[-][0-9][-]\d{3}[-]\d{5}[-][0-9]"/>
+    </xsd:restriction>
+  </xsd:simpleType>
 </xsd:schema>
