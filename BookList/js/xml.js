@@ -27,26 +27,34 @@ $(function () {
                     var xml_page = $(this).find('TotalPage').text();
                     var xml_price = $(this).find('Price').text();
 
-                    xmlArr += '<tr>';
-                    xmlArr += '<td class="xml_isbn">';
+                    xmlArr += '<tr filterCriteria="';
+                    xmlArr += xml_title;
+                    xmlArr += '">';
+
+                    xmlArr += '<td>';
                     xmlArr += xml_isbn;
                     xmlArr += '</td>';
 
-                    xmlArr += '<td class="xml_title">';
+                    xmlArr += '<td>';
                     xmlArr += xml_title;
                     xmlArr += '</td>';
 
-                    xmlArr += '<td class="xml_page">';
+                    xmlArr += '<td>';
                     xmlArr += xml_page;
                     xmlArr += '</td>';
 
-                    xmlArr += '<td class="xml_price">';
+                    xmlArr += '<td>';
                     xmlArr += xml_price;
                     xmlArr += '</td>';
                     xmlArr += '</tr>';
                 }); //end loop
 
+                //append array to table
                 $(xmlArr).appendTo(wrapper + ' table tbody');
+
+                //add sort and alternative hightlight each row in table
+                window.setTimeout('$("' + wrapper + ' table").tablesorter({sortList:[[0,0],[0,0]], widgets: [\'zebra\']});', 120);
+                $(wrapper + ' table').hide().slideDown('200');
             }
         }); //end ajax
     } //end function
