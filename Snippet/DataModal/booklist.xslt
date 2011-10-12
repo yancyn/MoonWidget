@@ -21,6 +21,7 @@
           <span class="pageno">Page</span>
           <span class="price">Price</span>
         </div>
+        <!-- @todo: convert to table structure so can easily export to excel spreadsheet -->
         <ol>
           <xsl:for-each select="Books/Book">
             <li>
