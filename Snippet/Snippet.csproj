@@ -127,6 +127,14 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataModal\booklist.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DataModal\books.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
