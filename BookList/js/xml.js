@@ -27,9 +27,7 @@ $(function () {
                     var xml_page = $(this).find('TotalPage').text();
                     var xml_price = $(this).find('Price').text();
 
-                    xmlArr += '<tr filterCriteria="';
-                    xmlArr += xml_title;
-                    xmlArr += '">';
+                    xmlArr += '<tr>';
 
                     xmlArr += '<td>';
                     xmlArr += xml_isbn;
@@ -46,13 +44,18 @@ $(function () {
                     xmlArr += '<td>';
                     xmlArr += xml_price;
                     xmlArr += '</td>';
+
+                    xmlArr += '<td>';
+                    xmlArr += xml_publishedDate;
+                    xmlArr += '</td>';
+
                     xmlArr += '</tr>';
                 }); //end loop
 
                 //append array to table
                 $(xmlArr).appendTo(wrapper + ' table tbody');
 
-                //add sort and alternative hightlight each row in table
+                //Add sort and zebra stripe to table (NOTE: this does not work as intended with sort feature)
                 window.setTimeout('$("' + wrapper + ' table").tablesorter({sortList:[[0,0],[0,0]], widgets: [\'zebra\']});', 120);
                 $(wrapper + ' table').hide().slideDown('200');
             }
