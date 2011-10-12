@@ -41,6 +41,7 @@
     <Content Include="booklist.xslt" />
     <Content Include="books.xml" />
     <Content Include="index.htm" />
+    <Content Include="js\jquery.min.js" />
     <Content Include="js\table_sort.js" />
     <Content Include="js\xml.js" />
   </ItemGroup>
