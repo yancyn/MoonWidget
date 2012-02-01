@@ -21,8 +21,8 @@ public class LunarCalendar {
 	}
 
 	/**
-	 * TODO: Extract xml into readable collection object.
-	 * 
+	 * Extract xml into readable collection object.
+	 * TODO: Ensure sorting must correct in source file otherwise please do sorting again.
 	 * @param activity
 	 * @return
 	 * @throws XmlPullParserException
@@ -30,6 +30,7 @@ public class LunarCalendar {
 	 * @see http
 	 *      ://android-er.blogspot.com/2010/04/read-xml-resources-in-android-
 	 *      using.html
+	 * @see res/xml/moon.xml
 	 */
 	public void initialize(Context context) throws XmlPullParserException, IOException {
 
@@ -78,10 +79,6 @@ public class LunarCalendar {
 			month = 0;
 			term = "";
 		}//end loop xml file
-		
-//		for(Lunar entry: this.data) {
-//			Log.d("DEBUG",entry.toString());
-//		}
 	}
 
 	/**

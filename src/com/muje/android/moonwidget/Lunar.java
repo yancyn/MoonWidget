@@ -3,8 +3,6 @@
 import java.util.ArrayList;
 import java.util.Date;
 
-import android.util.Log;
-
 public class Lunar {
 
 	/**
@@ -28,13 +26,13 @@ public class Lunar {
 	}
 
 	public String toString() {
-
-		//TODO: if it is a leap year then contains a leap month
-		String result = "";
-		//if(sun != null) result = sun.toString() + " ";
 		
-		String[] months = new String[] { "正", "二", "三", "四", "五", "六", "七",
-				"八", "九", "十", "十一", "十二" };
+		String result = "";
+		result += getYear()+"年";
+		result += "\n";
+		
+		//TODO: if it is a leap year then contains a leap month
+		String[] months = new String[] { "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二" };
 		result += months[this.month - 1] + "月";
 
 		String[] days = new String[] { "初一", "初二", "初三", "初四", "初五", "初六",
@@ -43,7 +41,7 @@ public class Lunar {
 				"廿七", "廿八", "廿九", "卅日", "卅一" };
 		result += days[this.date - 1];
 		
-		result += "\n" + this.term;
+		if(term.length()>0) result += "\n" + this.term;
 		return result;
 	}
 

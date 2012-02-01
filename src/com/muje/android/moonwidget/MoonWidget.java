@@ -11,11 +11,8 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 public class MoonWidget extends AppWidgetProvider {
+	
 	private RemoteViews remoteViews;
-	//private TextView todayText;
-	//private TextView todayRemark;
-	//private TextView nextMoon;
-	//private ImageView moonImage;
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
