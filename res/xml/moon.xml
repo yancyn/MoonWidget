@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <calendar>
-	<moon date="2011-11-08">
-		<month>11</month>
-		<day>1</day>
-		<message></message>
-	</moon>
-	<moon date="2011-11-25">
-		<month>10</month>
-		<day>8</day>
-		<message>立冬</message>
-	</moon>
-	<moon date="2011-11-23">
-		<month>10</month>
-		<day>28</day>
-		<message>小雪</message>
-	</moon>
+	<moon sun="2011-11-08" month="11" />
+	<moon sun="2011-11-25" term="立冬" />
+	<moon sun="2011-11-23" term="小雪" />
+	<moon sun="2011-12-22" term="冬至" />
+	<moon sun="2011-12-15" month="12" />
+	<moon sun="2012-01-23" month="1" />
+	<moon sun="2012-02-22" month="2" />
+	<moon sun="2012-03-22" month="3" />
+	<moon sun="2012-04-21" month="4" />
+	<moon sun="2012-05-21" month="4" />
+	<moon sun="2012-06-19" month="5" />
+	<moon sun="2012-07-19" month="6" />
+	<moon sun="2012-08-17" month="7" />
+	<moon sun="2012-09-16" month="8" />
+	<moon sun="2012-10-15" month="9" />
+	<moon sun="2012-11-14" month="10" />
+	<moon sun="2012-12-13" month="11" />
+	<moon sun="2013-01-12" month="12" />
 </calendar>

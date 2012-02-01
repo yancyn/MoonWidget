@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget"
+    android:focusable="true"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
@@ -10,25 +12,25 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/lunarText"
+            android:id="@+id/todayText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="十一月初二" />
+            android:gravity="right"
+            android:text="十一月十五" />
         
         <TextView
-            android:id="@+id/todayMessage"
+            android:id="@+id/todayRemark"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             android:text="立雪" />
 
         <TextView
-            android:id="@+id/nextMessage"
+            android:id="@+id/nextMoon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="十五 at 9-12-2011"
+            android:gravity="right"
+            android:text="十五 on 9-12-2011"
             android:textSize="4pt" />
     </LinearLayout>
 

@@ -1,36 +1,87 @@
 ﻿package com.muje.android.moonwidget;
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Map;
+
+import android.util.Log;
+
 public class Lunar {
 
 	/**
 	 * TODO: How to implement lunar year. What suppose to display?
 	 */
-	public int Year;
-	public int Month;
-	public int Day;
-	public String Message;
+	private int year;
+	private int month;
+	private int date;
+	/**
+	 * Indicate 24 solar terms.
+	 */
+	private String term;
 
-	public Lunar(int year, int month, int day) {
+	public Lunar(int year, int month, int date) {
 
-		this.Year = year;
-		// this.Month = month;
-		// this.Day = day;
-		this.Message = "";
+		this.year = year % 100;
+		this.month = month;
+		this.date = date;
+		this.term = "";
+		Log.d("DEBUG", "Year: " + this.year + " Month: " + month + " Date: " + date);
 	}
 
 	public String toString() {
 
 		String result = "";
-		String[] months = new String[] { "一", "二", "三", "四", "五", "六", "七",
+		String[] months = new String[] { "正", "二", "三", "四", "五", "六", "七",
 				"八", "九", "十", "十一", "十二" };
-		result += months[this.Month - 1] + "月";
+		result += months[this.month - 1] + "月";
 
 		String[] days = new String[] { "初一", "初二", "初三", "初四", "初五", "初六",
 				"初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六",
 				"十七", "十八", "十九", "廿日", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六",
 				"廿七", "廿八", "廿九", "卅日", "卅一" };
-		result += days[this.Day - 1];
+		result += days[this.date - 1];
 		return result;
+	}
+
+	/**
+	 * Return Chinese Year naming.
+	 * 
+	 * @return String
+	 * {@link} http://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90
+	 */
+	public String getYear() {
+		
+		//Dictionary jiazi = new Dictionary<>();	
+		ArrayList<String> temp = new ArrayList<String>();
+
+		// 10 celestial stems
+		String[] stems = new String[] { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛","壬", "癸" };
+
+		// 12 earth branches
+		String[] branches = new String[] { "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
+
+		// computing 60 花甲
+		for(int i=0;i<60;i++) {
+			String label = "";
+			label += stems[i%10];
+			label += branches[i%12];
+			temp.add(label);
+		}//end loops
+		
+		String[] jiazi = new String[temp.size()];
+		jiazi = temp.toArray(jiazi);
+		
+		//TODO: tune error for Chinese Year
+		//if the date value not pass lunar first month mean it still a last year
+		return jiazi[year%60-4];
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public int getDate() {
+		return date;
 	}
 
 	/**
@@ -40,14 +91,18 @@ public class Lunar {
 	 */
 	public int getImageId() {
 
-		Integer[] images = new Integer[] { R.drawable.m0, R.drawable.m1,
-				R.drawable.m2, R.drawable.m3, R.drawable.m4, R.drawable.m5,
-				R.drawable.m6, R.drawable.m7, R.drawable.m8, R.drawable.m9,
+		Integer[] images = new Integer[] { R.drawable.m00, R.drawable.m01,
+				R.drawable.m02, R.drawable.m03, R.drawable.m04, R.drawable.m05,
+				R.drawable.m06, R.drawable.m07, R.drawable.m08, R.drawable.m09,
 				R.drawable.m10, R.drawable.m11, R.drawable.m12, R.drawable.m13,
 				R.drawable.m14, R.drawable.m15, R.drawable.m16, R.drawable.m17,
 				R.drawable.m18, R.drawable.m19, R.drawable.m20, R.drawable.m21,
 				R.drawable.m22, R.drawable.m23, R.drawable.m24, R.drawable.m25,
 				R.drawable.m26, R.drawable.m27 };
-		return images[this.Day - 1];
+		return images[this.date - 1];
+	}
+	
+	public void setTerm(String term) {
+		this.term = term;
 	}
 }
