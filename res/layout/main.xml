@@ -1,43 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget"
-    android:focusable="true"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:focusable="true"
+    android:gravity="right"
     android:orientation="horizontal" >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/todayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/todayText"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="十一月十五" />
-        
-        <TextView
-            android:id="@+id/todayRemark"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="立雪" />
-
-        <TextView
-            android:id="@+id/nextMoon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="十五 on 9-12-2011"
-            android:textSize="4pt" />
-    </LinearLayout>
+        android:layout_gravity="center_vertical"
+        android:gravity="right"
+        android:text="十一月十五" />
 
     <ImageView
         android:id="@+id/moonImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10px"
         android:src="@drawable/m14" />
 
 </LinearLayout>

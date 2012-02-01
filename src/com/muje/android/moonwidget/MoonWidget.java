@@ -27,18 +27,17 @@ public class MoonWidget extends AppWidgetProvider {
 
 		try {
 			calendar.initialize(context);
-			Log.d("DEBUG",calendar.getToday().toString());
+			Log.d("DEBUG","Today moon: "+calendar.getToday().toString());
 			this.remoteViews.setTextViewText(R.id.todayText, calendar.getToday().toString());
-			//this.remoteViews.setTextViewText(R.id.todayRemark,calendar.getToday().getYear());;
-			this.remoteViews.setImageViewResource(R.id.moonImage,calendar.getToday().getImageId());
+			this.remoteViews.setImageViewResource(R.id.moonImage,calendar.getToday().getImageId());			
+			//this.remoteViews.setTextViewText(R.id.todayRemark,"");//calendar.getToday().getYear());;
+			//this.remoteViews.setTextViewText(R.id.nextMoon,"");
 			
 			//this must call ensure the widget take the latest changes
 			appWidgetManager.updateAppWidget(appWidgetIds,this.remoteViews);
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,8 +1,7 @@
 ﻿package com.muje.android.moonwidget;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Map;
+import java.util.Date;
 
 import android.util.Log;
 
@@ -14,6 +13,7 @@ public class Lunar {
 	private int year;
 	private int month;
 	private int date;
+	private Date sun;
 	/**
 	 * Indicate 24 solar terms.
 	 */
@@ -25,12 +25,14 @@ public class Lunar {
 		this.month = month;
 		this.date = date;
 		this.term = "";
-		Log.d("DEBUG", "Year: " + this.year + " Month: " + month + " Date: " + date);
 	}
 
 	public String toString() {
 
+		//TODO: if it is a leap year then contains a leap month
 		String result = "";
+		//if(sun != null) result = sun.toString() + " ";
+		
 		String[] months = new String[] { "正", "二", "三", "四", "五", "六", "七",
 				"八", "九", "十", "十一", "十二" };
 		result += months[this.month - 1] + "月";
@@ -40,40 +42,43 @@ public class Lunar {
 				"十七", "十八", "十九", "廿日", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六",
 				"廿七", "廿八", "廿九", "卅日", "卅一" };
 		result += days[this.date - 1];
+		
+		result += "\n" + this.term;
 		return result;
 	}
 
 	/**
 	 * Return Chinese Year naming.
 	 * 
-	 * @return String
-	 * {@link} http://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90
+	 * @return String {@link} http://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90
 	 */
 	public String getYear() {
-		
-		//Dictionary jiazi = new Dictionary<>();	
+
+		// Dictionary jiazi = new Dictionary<>();
 		ArrayList<String> temp = new ArrayList<String>();
 
 		// 10 celestial stems
-		String[] stems = new String[] { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛","壬", "癸" };
+		String[] stems = new String[] { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
 
 		// 12 earth branches
 		String[] branches = new String[] { "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
 
 		// computing 60 花甲
-		for(int i=0;i<60;i++) {
+		for (int i = 0; i < 60; i++) {
 			String label = "";
-			label += stems[i%10];
-			label += branches[i%12];
+			label += stems[i % stems.length];// 10
+			label += branches[i % branches.length];// 12
 			temp.add(label);
-		}//end loops
-		
+		}// end loops
+
 		String[] jiazi = new String[temp.size()];
 		jiazi = temp.toArray(jiazi);
-		
-		//TODO: tune error for Chinese Year
-		//if the date value not pass lunar first month mean it still a last year
-		return jiazi[year%60-4];
+
+		// 1804 is the first 甲子 and so on...
+		// TODO: tune error for Chinese Year
+		// if the date value not pass lunar first month mean it still a last
+		// year
+		return jiazi[year % 60 - 4];
 	}
 
 	public int getMonth() {
@@ -99,9 +104,32 @@ public class Lunar {
 				R.drawable.m18, R.drawable.m19, R.drawable.m20, R.drawable.m21,
 				R.drawable.m22, R.drawable.m23, R.drawable.m24, R.drawable.m25,
 				R.drawable.m26, R.drawable.m27 };
-		return images[this.date - 1];
+		
+		//handle exception: lunar date suppose don't have 29 or 30
+		if (this.date > images.length) {
+			return images[0];
+		} else {
+			return images[this.date - 1];
+		}
 	}
-	
+	/**
+	 * Set the corresponding Gregorian date value.
+	 * @param sun Date
+	 */
+	public void setSun(Date sun) {
+		this.sun = sun;
+	}
+	/**
+	 * Get the corresponding Gregorian date value.
+	 * @return Date
+	 */
+	public Date getSun() {
+		return this.sun;
+	}
+	/**
+	 * Set the 24 solar term value.
+	 * @param term
+	 */
 	public void setTerm(String term) {
 		this.term = term;
 	}

@@ -13,8 +13,8 @@ import android.util.Log;
 
 public class LunarCalendar {
 
-	public ArrayList<Lunar> data;
-	public Lunar today;
+	private ArrayList<Lunar> data;
+	private Lunar today;
 
 	public LunarCalendar() {
 		this.data = new ArrayList<Lunar>();
@@ -31,8 +31,7 @@ public class LunarCalendar {
 	 *      ://android-er.blogspot.com/2010/04/read-xml-resources-in-android-
 	 *      using.html
 	 */
-	public void initialize(Context context) throws XmlPullParserException,
-			IOException {
+	public void initialize(Context context) throws XmlPullParserException, IOException {
 
 		Resources res = context.getResources();
 		XmlResourceParser xpp = res.getXml(R.xml.moon);
@@ -59,18 +58,34 @@ public class LunarCalendar {
 			}
 
 			if (month > 0) {
-				this.data.add(new Lunar(now.getYear(), month, 1));
+				Lunar entry = new Lunar(now.getYear(), month, 1);
+				//TODO: Confirm the year value why input 2012 became 3912
+				//Log.d("DEBUG","Year: "+sun.subSequence(0, 4).toString());
+				Date gregorian = new Date(
+						Integer.parseInt(sun.subSequence(0, 4).toString())-1900,
+						Integer.parseInt(sun.subSequence(5, 7).toString())-1,
+						Integer.parseInt(sun.subSequence(8, 10).toString()));
+				//Log.d("DEBUG","Gregorian: "+gregorian.getYear());
+				entry.setSun(gregorian);				
+				if(term.length()>0) {
+					entry.setTerm(term);
+				}
+				this.data.add(entry);
 			}
 
 			eventType = xpp.next();
 			sun = "";
 			month = 0;
 			term = "";
-		}
+		}//end loop xml file
+		
+//		for(Lunar entry: this.data) {
+//			Log.d("DEBUG",entry.toString());
+//		}
 	}
 
 	/**
-	 * Return today lunar date.
+	 * TODO: Return today in  lunar date.
 	 * 
 	 * @return
 	 */
@@ -78,9 +93,23 @@ public class LunarCalendar {
 
 		if (today == null) {
 			Date todaySun = new Date();
-			Log.d("DEBUG", "Today: " + todaySun.toString());
-			this.today = new Lunar(todaySun.getYear(), todaySun.getMonth() + 1,
-					todaySun.getDate());
+			Date last = new Date();
+			int days = 1;
+			for(Lunar entry: this.data){
+				Date sun = entry.getSun();
+				if(sun.compareTo(todaySun) >= 0) {
+					Log.d("DEBUG",last.toString());
+					long diffInSecs = (todaySun.getTime()-last.getTime())/1000;
+					days += (int)(diffInSecs/86400);
+					Log.d("DEBUG","Diff days: "+days);
+					break;
+				}
+				last = sun;
+			}
+			
+			Log.d("DEBUG", "Today sun: " + todaySun.toString());
+			this.today = new Lunar(last.getYear(), last.getMonth() + 1, days);
+			//Log.d("DEBUG", "Today moon: "+today.toString());
 		}
 
 		return today;
