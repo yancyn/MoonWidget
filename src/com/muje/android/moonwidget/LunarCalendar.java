@@ -16,20 +16,21 @@ public class LunarCalendar {
 	private ArrayList<Lunar> data;
 	private Lunar today;
 
+	/**
+	 * Lunar calendar manager class.
+	 */
 	public LunarCalendar() {
 		this.data = new ArrayList<Lunar>();
 	}
 
 	/**
 	 * Extract xml into readable collection object.
-	 * TODO: Ensure sorting must correct in source file otherwise please do sorting again.
+	 * TODO: Ensure sorting must correct in source file.
 	 * @param activity
 	 * @return
 	 * @throws XmlPullParserException
 	 * @throws IOException
-	 * @see http
-	 *      ://android-er.blogspot.com/2010/04/read-xml-resources-in-android-
-	 *      using.html
+	 * @see http://android-er.blogspot.com/2010/04/read-xml-resources-in-android-using.html
 	 * @see res/xml/moon.xml
 	 */
 	public void initialize(Context context) throws XmlPullParserException, IOException {
@@ -62,6 +63,10 @@ public class LunarCalendar {
 				Lunar entry = new Lunar(now.getYear(), month, 1);
 				//TODO: Confirm the year value why input 2012 became 3912
 				//Log.d("DEBUG","Year: "+sun.subSequence(0, 4).toString());
+//				TODO: Date gregorian = new GregorianCalendar(
+//						Integer.parseInt(sun.subSequence(0, 4).toString()),
+//						Integer.parseInt(sun.subSequence(5, 7).toString()),
+//						Integer.parseInt(sun.subSequence(8, 10).toString()));
 				Date gregorian = new Date(
 						Integer.parseInt(sun.subSequence(0, 4).toString())-1900,
 						Integer.parseInt(sun.subSequence(5, 7).toString())-1,
@@ -82,7 +87,7 @@ public class LunarCalendar {
 	}
 
 	/**
-	 * TODO: Return today in  lunar date.
+	 * Return today in  lunar date.
 	 * 
 	 * @return
 	 */
@@ -111,7 +116,11 @@ public class LunarCalendar {
 
 		return today;
 	}
-
+	/**
+	 * Get the next full moon or new moon.
+	 * @deprecated
+	 * @return
+	 */
 	public String getNext() {
 
 		String result = "";
