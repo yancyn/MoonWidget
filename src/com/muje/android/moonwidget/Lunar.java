@@ -138,10 +138,11 @@ public class Lunar {
 	 * @return
 	 */
 	public String getDayText() {
+		//there is no 31st day in a lunar month
 		String[] days = new String[] { "初一", "初二", "初三", "初四", "初五", "初六",
 				"初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六",
 				"十七", "十八", "十九", "廿日", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六",
-				"廿七", "廿八", "廿九", "卅日", "卅一" };
+				"廿七", "廿八", "廿九", "卅日" };
 		
 		//handle exception case where lunar day suppose not exceed 28
 		if(this.day == 0) {
@@ -158,7 +159,8 @@ public class Lunar {
 	 * @return
 	 */
 	public int getImageId() {
-
+		
+		//lunar month may contains 29 days or 30 days though
 		Integer[] images = new Integer[] { R.drawable.m00, R.drawable.m01,
 				R.drawable.m02, R.drawable.m03, R.drawable.m04, R.drawable.m05,
 				R.drawable.m06, R.drawable.m07, R.drawable.m08, R.drawable.m09,
@@ -166,7 +168,7 @@ public class Lunar {
 				R.drawable.m14, R.drawable.m15, R.drawable.m16, R.drawable.m17,
 				R.drawable.m18, R.drawable.m19, R.drawable.m20, R.drawable.m21,
 				R.drawable.m22, R.drawable.m23, R.drawable.m24, R.drawable.m25,
-				R.drawable.m26, R.drawable.m27 };
+				R.drawable.m26, R.drawable.m27, R.drawable.m28, R.drawable.m29 };
 		
 		//handle exception case where lunar day suppose not exceed 28
 		if(this.day == 0) {
