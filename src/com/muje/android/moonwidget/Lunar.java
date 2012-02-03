@@ -5,13 +5,12 @@ import java.util.Date;
 
 public class Lunar {
 
-	/**
-	 * TODO: How to implement lunar year. What suppose to display?
-	 */
-	private int year;
+	private int year;	
 	private int month;
 	private int day;
 	private Date sun;
+	private boolean isLeapMonth;
+	
 	/**
 	 * Indicate 24 solar terms.
 	 */
@@ -116,9 +115,23 @@ public class Lunar {
 		String[] months = new String[] { "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二" };		
 		if(this.month > 0) {
 			output = months[this.month - 1] + output;
+			if(this.isLeapMonth) output = "润" + output;
 		}
 		
 		return output;
+	}
+	/**
+	 * Set current month is a leap month.
+	 */
+	public void setLeapMonth() {
+		this.isLeapMonth = true;
+	}
+	/**
+	 * Indicate this month is a leap month.
+	 * @return
+	 */
+	public boolean isLeapMonth() {
+		return this.isLeapMonth;
 	}
 	/**
 	 * Return Chinese lunar date value.
@@ -187,6 +200,7 @@ public class Lunar {
 	}
 	/**
 	 * Return today solar term if has.
+	 * TODO: get solar term by calculation formula.
 	 * @return
 	 */
 	public String getTerm() {		

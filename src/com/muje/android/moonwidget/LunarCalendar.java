@@ -12,25 +12,39 @@ import android.content.res.XmlResourceParser;
 import android.util.Log;
 
 public class LunarCalendar {
-
+	
+	/**
+	 * A collection of lunar entry from datasheet.
+	 * @see res/xml/moon.xml
+	 */
 	private ArrayList<Lunar> data;
+	/**
+	 * Today lunar object.
+	 */
 	private Lunar today;
+	/**
+	 * Today date in Gregorian value.
+	 */
+	private Date todaySun;
 
 	/**
 	 * Lunar calendar manager class.
 	 */
 	public LunarCalendar() {
+		this.todaySun = new Date();
 		this.data = new ArrayList<Lunar>();
 	}
 
 	/**
 	 * Extract xml into readable collection object.
-	 * TODO: Ensure sorting must correct in source file.
+	 * 
 	 * @param activity
 	 * @return
 	 * @throws XmlPullParserException
 	 * @throws IOException
-	 * @see http://android-er.blogspot.com/2010/04/read-xml-resources-in-android-using.html
+	 * @see http
+	 *      ://android-er.blogspot.com/2010/04/read-xml-resources-in-android-
+	 *      using.html
 	 * @see res/xml/moon.xml
 	 */
 	public void initialize(Context context) throws XmlPullParserException, IOException {
@@ -59,24 +73,24 @@ public class LunarCalendar {
 			}
 
 			if (month > 0 || term.length() > 0) {
-				
+
 				Lunar entry = null;
 				int year = Integer.parseInt(sun.subSequence(0, 4).toString());
-				if(month > 0) {
+				if (month > 0) {
 					entry = new Lunar(year, month, 1);
 				} else {
-					entry = new Lunar(year,term);
+					entry = new Lunar(year, term);
 				}
-				
-				//Log.d("DEBUG","Year: "+sun.subSequence(0, 4).toString());
-//				TODO: Date gregorian = new GregorianCalendar()
+
+				// Log.d("DEBUG","Year: "+sun.subSequence(0, 4).toString());
+				// TODO: Date gregorian = new GregorianCalendar()
 				Date gregorian = new Date(
-						year-1900,
-						Integer.parseInt(sun.subSequence(5, 7).toString())-1,
+						year - 1900,
+						Integer.parseInt(sun.subSequence(5, 7).toString()) - 1,
 						Integer.parseInt(sun.subSequence(8, 10).toString()));
-				//Log.d("DEBUG","Gregorian: "+gregorian.getYear());
-				entry.setSun(gregorian);				
-				if(term.length()>0) {
+				// Log.d("DEBUG","Gregorian: "+gregorian.getYear());
+				entry.setSun(gregorian);
+				if (term.length() > 0) {
 					entry.setTerm(term);
 				}
 				this.data.add(entry);
@@ -86,48 +100,86 @@ public class LunarCalendar {
 			sun = "";
 			month = 0;
 			term = "";
-		}//end loop xml file
-		
-		//ensure sort correctly for loop in getToday()
-		Collections.sort(this.data,new LunarComparator());
+		}// end loop xml file
+
+		// ensure sort correctly for loop in getToday()
+		Collections.sort(this.data, new LunarComparator());
 	}
 
 	/**
-	 * Return today in  lunar date.
+	 * Return today in lunar date.
 	 * 
 	 * @return
 	 */
 	public Lunar getToday() {
 
 		if (today == null) {
-			Date todaySun = new Date();
+			int days = 0;
 			Date last = new Date();
-			int days = 1;
-			for(int i=0;i<this.data.size();i++) {
-			//for(Lunar entry: this.data){
+			int nextMonth = 0;
+			for (int i = 0; i < this.data.size(); i++) {
+				// for(Lunar entry: this.data){
 				Lunar entry = data.get(i);
 				Date sun = entry.getSun();
-				if(sun.compareTo(todaySun) >= 0 && entry.getMonth() > 0) {
-					Log.d("DEBUG","last 1st moon: " + last.toString());
-					long diffInSecs = (todaySun.getTime()-last.getTime())/1000;
-					days += (int)(diffInSecs/86400);//one day has 86,400 seconds
-					Log.d("DEBUG","Diff days: "+days);
+				if (sun.compareTo(todaySun) >= 0 && entry.getMonth() > 0) {
+					Log.d("DEBUG", "last 1st moon: " + last.toString());
+					days = diffDays(todaySun, last);
+					Log.d("DEBUG", "Diff days: " + days);
+					nextMonth = getNextLunarMonth(i);
 					break;
 				}
-				
-				//only take valid Lunar value which has first of moon
-				if(entry.getMonth()>0) last = sun;
+
+				// only take valid Lunar value which has first of moon
+				if (entry.getMonth() > 0)
+					last = sun;
 			}
-			
+
 			Log.d("DEBUG", "Today sun: " + todaySun.toString());
-			this.today = new Lunar(last.getYear(), last.getMonth() + 1, days);
-			//Log.d("DEBUG", "Today moon: "+today.toString());
+			this.today = new Lunar(last.getYear(), last.getMonth() + 1, days + 1);// include today
+			// Log.d("DEBUG", "Today moon: "+today.toString());
+
+			// check is a leap month or not
+			if (this.today.getMonth() == nextMonth) {
+				this.today.setLeapMonth();
+			}
 		}
 
 		return today;
 	}
+
+	/**
+	 * Compare two date values and return the different in days.
+	 * 
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
+	private int diffDays(Date date1, Date date2) {
+		long diffInSecs = (date1.getTime() - date2.getTime()) / 1000;
+		return (int) (diffInSecs / 86400);// one day has 86,400 seconds
+	}
+
+	/**
+	 * Get the following lunar month.
+	 * 
+	 * @param index
+	 *            Index in data collection to start seeking.
+	 * @return Lunar month value.
+	 */
+	private int getNextLunarMonth(int index) {
+
+		for (int i = index; i < this.data.size(); i++) {
+			int month = this.data.get(i).getMonth();
+			if (month > 0)
+				return month;
+		}
+
+		return 0;
+	}
+
 	/**
 	 * Get the next full moon or new moon.
+	 * 
 	 * @deprecated
 	 * @return
 	 */
