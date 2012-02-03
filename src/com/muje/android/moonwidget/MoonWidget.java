@@ -26,8 +26,8 @@ public class MoonWidget extends AppWidgetProvider {
 			Lunar lunar = calendar.getToday();
 			Log.d("DEBUG", "Today moon: " + lunar.toString());
 
-			String text = lunar.getYear();
-			text += "\n" + lunar.getMonth() + lunar.getDate();
+			String text = lunar.getYearText();
+			text += "\n" + lunar.getMonthText() + lunar.getDayText();
 			if (lunar.getTerm().length() > 0)
 				text += "\n" + lunar.getTerm();
 			this.remoteViews.setTextViewText(R.id.todayText, text);

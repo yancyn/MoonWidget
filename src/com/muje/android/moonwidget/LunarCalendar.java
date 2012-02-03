@@ -43,7 +43,6 @@ public class LunarCalendar {
 		String sun = "";
 		int month = 0;
 		String term = "";
-		Date now = new Date();
 		while (eventType != XmlPullParser.END_DOCUMENT) {
 
 			if (eventType == XmlPullParser.START_TAG) {
@@ -59,16 +58,20 @@ public class LunarCalendar {
 				}
 			}
 
-			if (month > 0) {
-				Lunar entry = new Lunar(now.getYear(), month, 1);
-				//TODO: Confirm the year value why input 2012 became 3912
+			if (month > 0 || term.length() > 0) {
+				
+				Lunar entry = null;
+				int year = Integer.parseInt(sun.subSequence(0, 4).toString());
+				if(month > 0) {
+					entry = new Lunar(year, month, 1);
+				} else {
+					entry = new Lunar(year,term);
+				}
+				
 				//Log.d("DEBUG","Year: "+sun.subSequence(0, 4).toString());
-//				TODO: Date gregorian = new GregorianCalendar(
-//						Integer.parseInt(sun.subSequence(0, 4).toString()),
-//						Integer.parseInt(sun.subSequence(5, 7).toString()),
-//						Integer.parseInt(sun.subSequence(8, 10).toString()));
+//				TODO: Date gregorian = new GregorianCalendar()
 				Date gregorian = new Date(
-						Integer.parseInt(sun.subSequence(0, 4).toString())-1900,
+						year-1900,
 						Integer.parseInt(sun.subSequence(5, 7).toString())-1,
 						Integer.parseInt(sun.subSequence(8, 10).toString()));
 				//Log.d("DEBUG","Gregorian: "+gregorian.getYear());
@@ -84,6 +87,9 @@ public class LunarCalendar {
 			month = 0;
 			term = "";
 		}//end loop xml file
+		
+		//ensure sort correctly for loop in getToday()
+		Collections.sort(this.data,new LunarComparator());
 	}
 
 	/**
@@ -97,16 +103,20 @@ public class LunarCalendar {
 			Date todaySun = new Date();
 			Date last = new Date();
 			int days = 1;
-			for(Lunar entry: this.data){
+			for(int i=0;i<this.data.size();i++) {
+			//for(Lunar entry: this.data){
+				Lunar entry = data.get(i);
 				Date sun = entry.getSun();
-				if(sun.compareTo(todaySun) >= 0) {
-					Log.d("DEBUG",last.toString());
+				if(sun.compareTo(todaySun) >= 0 && entry.getMonth() > 0) {
+					Log.d("DEBUG","last 1st moon: " + last.toString());
 					long diffInSecs = (todaySun.getTime()-last.getTime())/1000;
-					days += (int)(diffInSecs/86400);
+					days += (int)(diffInSecs/86400);//one day has 86,400 seconds
 					Log.d("DEBUG","Diff days: "+days);
 					break;
 				}
-				last = sun;
+				
+				//only take valid Lunar value which has first of moon
+				if(entry.getMonth()>0) last = sun;
 			}
 			
 			Log.d("DEBUG", "Today sun: " + todaySun.toString());

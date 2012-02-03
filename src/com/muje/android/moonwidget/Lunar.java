@@ -10,27 +10,41 @@ public class Lunar {
 	 */
 	private int year;
 	private int month;
-	private int date;
+	private int day;
 	private Date sun;
 	/**
 	 * Indicate 24 solar terms.
 	 */
 	private String term;
 	/**
-	 * Default contructor for lunar date.
+	 * Default constructor for lunar date.
 	 * @param year Gregorian year.
 	 * @param month Lunar month.
-	 * @param date Lunar date.
+	 * @param day Lunar day.
 	 */
-	public Lunar(int year, int month, int date) {
+	public Lunar(int year, int month, int day) {
 		this.year = year % 100;
 		this.month = month;
-		this.date = date;
+		this.day = day;
 		this.term = "";
 	}
+	/**
+	 * Constructor for setting up solar term only without lunar month value.
+	 * @param year
+	 * @param term
+	 */
+	public Lunar(int year, String term) {
+		this.year = year%100;
+		this.month = 0;
+		this.day = 0;
+		this.term = term;
+	}
+	/**
+	 * Override toString() output.
+	 */
 	public String toString() {		
 		String result = "";
-		result += getYear() + getMonth() + getDate();
+		result += getYearText() + getMonthText() + getDayText();
 		result += getTerm();
 		return result;
 	}
@@ -42,25 +56,26 @@ public class Lunar {
 		return this.year;
 	}
 	/**
-	 * Return sun Gregorian in month value.
+	 * Return lunar month value.
 	 * @return
 	 */
-	public int getSunMonth() {
+	public int getMonth() {
 		return this.month;
 	}
 	/**
-	 * Return sun Gregorian in date value.
+	 * Return lunar day value.
 	 * @return
 	 */
-	public int getSunDate() {
-		return this.date;
+	public int getDay() {
+		return this.day;
 	}
 	/**
 	 * Return Chinese Year naming.
 	 * 
-	 * @return String {@link} http://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90
+	 * @return String
+	 * @see http://zh.wikipedia.org/wiki/%E7%94%B2%E5%AD%90
 	 */
-	public String getYear() {
+	public String getYearText() {
 
 		// Dictionary jiazi = new Dictionary<>();
 		ArrayList<String> temp = new ArrayList<String>();
@@ -83,30 +98,46 @@ public class Lunar {
 		jiazi = temp.toArray(jiazi);
 
 		// 1804 is the first 甲子 and so on...
-		// TODO: tune error for Chinese Year
-		// if the date value not pass lunar first month mean it still a last
-		// year
-		return jiazi[year % 60 - 4]+ "年";
+		// TODO: tune buffer for Chinese Year
+		// if the date value not pass lunar first month mean it still stick with last year
+		if(year < 4) {
+			return "年";
+		} else {
+			return jiazi[year % 60 - 4]+ "年";
+		}
 	}
 	/**
 	 * Return Chinese lunar month.
 	 * TODO: handle leap month if it is happen in leap year.
 	 * @return
 	 */
-	public String getMonth() {
-		String[] months = new String[] { "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二" };
-		return months[this.month - 1] + "月";
+	public String getMonthText() {
+		String output = "月";
+		String[] months = new String[] { "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二" };		
+		if(this.month > 0) {
+			output = months[this.month - 1] + output;
+		}
+		
+		return output;
 	}
 	/**
 	 * Return Chinese lunar date value.
 	 * @return
 	 */
-	public String getDate() {
+	public String getDayText() {
 		String[] days = new String[] { "初一", "初二", "初三", "初四", "初五", "初六",
 				"初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六",
 				"十七", "十八", "十九", "廿日", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六",
 				"廿七", "廿八", "廿九", "卅日", "卅一" };
-		return days[this.date - 1];
+		
+		//handle exception case where lunar day suppose not exceed 28
+		if(this.day == 0) {
+			return days[0];
+		} else if(this.day > days.length) {
+			return days[0];
+		} else {
+			return days[this.day - 1];
+		}
 	}
 	/**
 	 * Get the corresponding image value for display.
@@ -124,11 +155,13 @@ public class Lunar {
 				R.drawable.m22, R.drawable.m23, R.drawable.m24, R.drawable.m25,
 				R.drawable.m26, R.drawable.m27 };
 		
-		//handle exception: lunar date suppose don't have 29 or 30
-		if (this.date > images.length) {
+		//handle exception case where lunar day suppose not exceed 28
+		if(this.day == 0) {
+			return images[0];
+		} else if (this.day > images.length) {
 			return images[0];
 		} else {
-			return images[this.date - 1];
+			return images[this.day - 1];
 		}
 	}
 	/**
@@ -156,7 +189,7 @@ public class Lunar {
 	 * Return today solar term if has.
 	 * @return
 	 */
-	public String getTerm() {
+	public String getTerm() {		
 		return this.term;
 	}
 }
