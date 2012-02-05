@@ -136,6 +136,7 @@ public class LunarCalendar {
 
 			Log.d("DEBUG", "Today sun: " + todaySun.toString());
 			this.today = new Lunar(last.getYear(), last.getMonth() + 1, days + 1);// include today
+			this.today.setTerm(getTerm());
 			// Log.d("DEBUG", "Today moon: "+today.toString());
 
 			// check is a leap month or not
@@ -145,6 +146,21 @@ public class LunarCalendar {
 		}
 
 		return today;
+	}
+	/**
+	 * Get solar term in database.
+	 * @return
+	 */
+	private String getTerm() {
+		
+		String term = "";
+		for(Lunar entry: this.data){
+			if(todaySun.compareTo(entry.getSun())==0) {
+				return entry.getTerm();
+			}
+		}
+		
+		return term;		
 	}
 
 	/**
