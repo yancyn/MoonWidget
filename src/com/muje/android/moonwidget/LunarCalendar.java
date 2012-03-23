@@ -42,13 +42,11 @@ public class LunarCalendar {
 	 * @return
 	 * @throws XmlPullParserException
 	 * @throws IOException
-	 * @see http
-	 *      ://android-er.blogspot.com/2010/04/read-xml-resources-in-android-
-	 *      using.html
+	 * @see http://android-er.blogspot.com/2010/04/read-xml-resources-in-android-using.html
 	 * @see res/xml/moon.xml
 	 */
 	public void initialize(Context context) throws XmlPullParserException, IOException {
-
+		
 		Resources res = context.getResources();
 		XmlResourceParser xpp = res.getXml(R.xml.moon);
 		xpp.next();
@@ -135,7 +133,7 @@ public class LunarCalendar {
 			}
 
 			Log.d("DEBUG", "Today sun: " + todaySun.toString());
-			this.today = new Lunar(last.getYear(), last.getMonth() + 1, days + 1);// include today
+			this.today = new Lunar(last.getYear()+1900, last.getMonth() + 1, days + 1);// include today
 			this.today.setTerm(getTerm());
 			// Log.d("DEBUG", "Today moon: "+today.toString());
 

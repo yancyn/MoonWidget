@@ -48,13 +48,19 @@ public class CalendarActivity extends Activity {
 	private void display(int year, int month) {
 		
 		//validation
-		if(month>=12) {
+		if(month>12) {
 			year++;
 			month -= 12;
-		} else if(month<0) {
+		} else if(month<=0) {
 			year--;
 			month += 12;
 		}
+		
+		//display Chinese Year
+		Lunar lunar = new Lunar(year,month,1);
+		TextView textViewYear = (TextView)findViewById(R.id.textViewYear);
+		textViewYear.setText(lunar.getYearText());
+		
 		
 		// display this month as text
 		Date date = new Date(year-1900,month-1,1);

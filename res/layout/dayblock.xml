@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/dayview"
     android:id="@+id/GridItem"
+    android:padding="2dp"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:stretchColumns="1" >
+    android:layout_height="fill_parent">
 
     <TableRow >
 
@@ -16,6 +17,7 @@
 
         <ListView
             android:id="@+id/listViewEvent"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent" >
         </ListView>
     </TableRow>
@@ -23,12 +25,7 @@
     <TableRow >
 
         <TextView
-            android:id="@+id/textViewStem"
-            android:text="" />
-
-        <TextView
             android:id="@+id/textViewLunarDate"
-            android:layout_gravity="right"
             android:text="廿三" />
     </TableRow>
 

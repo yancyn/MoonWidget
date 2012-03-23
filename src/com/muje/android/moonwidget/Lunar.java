@@ -33,7 +33,7 @@ public class Lunar {
 	 *            Lunar day.
 	 */
 	public Lunar(int year, int month, int day) {
-		this.year = year % 100;
+		this.year = year;// % 100;
 		this.month = month;
 		this.day = day;
 		this.term = "";
@@ -46,7 +46,7 @@ public class Lunar {
 	 * @param term
 	 */
 	public Lunar(int year, String term) {
-		this.year = year % 100;
+		this.year = year;// % 100;
 		this.month = 0;
 		this.day = 0;
 		this.term = term;
@@ -121,11 +121,7 @@ public class Lunar {
 		// TODO: tune buffer for Chinese Year
 		// if the date value not pass lunar first month mean it still stick with
 		// last year
-		if (year < 4) {
-			return "年";
-		} else {
-			return jiazi[year % 60 - 4] + "年";
-		}
+		return jiazi[(year-4) % 60] + "年";
 	}
 
 	/**
