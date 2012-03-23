@@ -101,12 +101,10 @@ public class Lunar {
 		ArrayList<String> temp = new ArrayList<String>();
 
 		// 10 celestial stems
-		String[] stems = new String[] { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛",
-				"壬", "癸" };
+		String[] stems = new String[] { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
 
 		// 12 earth branches
-		String[] branches = new String[] { "子", "丑", "寅", "卯", "辰", "巳", "午",
-				"未", "申", "酉", "戌", "亥" };
+		String[] branches = new String[] { "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
 
 		// computing 60 花甲
 		for (int i = 0; i < 60; i++) {

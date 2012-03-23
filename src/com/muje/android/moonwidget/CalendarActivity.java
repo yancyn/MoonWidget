@@ -2,9 +2,14 @@ package com.muje.android.moonwidget;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -12,26 +17,76 @@ import android.widget.TextView;
  * Lunar calendar view activity.
  * 
  * @author yeang-shing.then
- * @see http
- *      ://www.firstdroid.com/2011/02/06/android-tutorial-gridview-with-icon-
- *      and-text/
+ * @see http://www.firstdroid.com/2011/02/06/android-tutorial-gridview-with-icon-and-text/
  */
 public class CalendarActivity extends Activity {
-	private GridView gridView1;
+	private GridView gridViewCalendar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.calendar);
-
-		//display this month as text
-		SimpleDateFormat format = new SimpleDateFormat("MMM");
-		Calendar today = Calendar.getInstance();		
-		TextView textView1 = (TextView) findViewById(R.id.textView1);
-		textView1.setText(format.format(today.getTime()));
-
-		//arrange all day in a month view
-		gridView1 = (GridView) findViewById(R.id.gridView1);
-		gridView1.setAdapter(new MonthAdapter(this));
+		
+		//previous month click
+		Button button1 = (Button)findViewById(R.id.buttonPrevious);
+		button1.setOnClickListener(previousOnClick);
+		
+		//next month click
+		Button button2 = (Button)findViewById(R.id.buttonNext);
+		button2.setOnClickListener(nextOnClick);
+		
+		//show this month
+		Calendar today = Calendar.getInstance();
+		display(today.getTime().getYear()+1900,
+				today.getTime().getMonth()+1);
 	}
+	/**
+	 * Display calendar in month view.
+	 * @param year Gregorian year value ie. 2012
+	 * @param month Gregorian month value from 1 to 12.
+	 */
+	private void display(int year, int month) {
+		
+		//validation
+		if(month>=12) {
+			year++;
+			month -= 12;
+		} else if(month<0) {
+			year--;
+			month += 12;
+		}
+		
+		// display this month as text
+		Date date = new Date(year-1900,month-1,1);
+		Log.d("DEBUG","displaying month: "+date.toLocaleString());
+		SimpleDateFormat format = new SimpleDateFormat("MMM yyyy");
+		TextView textViewMonth = (TextView) findViewById(R.id.textViewMonth);
+		textViewMonth.setText(format.format(date));
+		//for next & previous button recognize what is current displayed month
+		textViewMonth.setTag(date);
+
+		// arrange all day in a month view
+		gridViewCalendar = (GridView) findViewById(R.id.gridViewCalendar);
+		gridViewCalendar.setAdapter(new MonthAdapter(this,year-1900,month-1));
+	}
+	
+	protected OnClickListener previousOnClick = new OnClickListener() {
+
+		@Override
+		public void onClick(View arg0) {
+			TextView textViewMonth = (TextView)findViewById(R.id.textViewMonth);
+			Date date = (Date)textViewMonth.getTag();
+			display(date.getYear()+1900,date.getMonth());			 
+		}		
+	};
+	protected OnClickListener nextOnClick = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			TextView textViewMonth = (TextView)findViewById(R.id.textViewMonth);
+			Date date = (Date)textViewMonth.getTag();
+			display(date.getYear()+1900,date.getMonth()+2);			
+		}
+		
+	};
 }

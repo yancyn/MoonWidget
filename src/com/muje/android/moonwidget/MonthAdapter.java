@@ -11,10 +11,20 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class MonthAdapter extends BaseAdapter {
-	Context context;
+	private Context context;
+	private int year;
+	private int month;
 
-	public MonthAdapter(Context context) {
+	/**
+	 * Default constructor.
+	 * @param context
+	 * @param year Gregorian year value. ie. 2012.
+	 * @param month Gregorian month integer start from 1,2,3,..,12.
+	 */
+	public MonthAdapter(Context context,int year, int month) {
 		this.context = context;
+		this.year = year;
+		this.month = month;
 	}
 
 	@Override
@@ -43,11 +53,11 @@ public class MonthAdapter extends BaseAdapter {
 			convertView = vi.inflate(R.layout.dayblock, null);
 			
 			//TODO: change the numbering of day in month
-			TextView textView11 = (TextView)convertView.findViewById(R.id.textView11);
-			textView11.setText(Integer.toString(position));
+			TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
+			textViewDate.setText(Integer.toString(position));
 			
-			TextView textView12 = (TextView)convertView.findViewById(R.id.textView12);
-			textView12.setText(Lunar.DAYS[position%Lunar.DAYS.length]);			
+			TextView textViewLunarDate = (TextView)convertView.findViewById(R.id.textViewLunarDate);
+			textViewLunarDate.setText(Lunar.DAYS[position%Lunar.DAYS.length]);			
 		}
 
 		return convertView;
@@ -76,17 +86,14 @@ public class MonthAdapter extends BaseAdapter {
 //				|| format.format(lastDay) == "1")
 //			rowOfWeek++;
 		
-		Date today = new Date();
-		Date firstDay = new Date(
-				today.getYear(),
-				today.getMonth(),
-				1);
+		//Date today = new Date();
+		Date firstDay = new Date(year-1900,month-1,1);
+		
 		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month, 1);
 		int totalDayInMonth = calendar.getActualMaximum(calendar.DAY_OF_MONTH);
-		Date lastDay = new Date(
-				today.getYear(),
-				today.getMonth(),
-				totalDayInMonth);
+		Date lastDay = new Date(year-1900,month-1,totalDayInMonth);
+		
 		// sunday = 0, monday = 1, ... , saturday = 6
 		if(firstDay.getDay() == 0 || lastDay.getDay() == 1)
 			rowOfWeek ++;

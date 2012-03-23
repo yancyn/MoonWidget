@@ -8,14 +8,14 @@
     <TableRow >
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textViewDate"
             android:text="Day" />
     </TableRow>
 
     <TableRow >
 
         <ListView
-            android:id="@+id/listView1"
+            android:id="@+id/listViewEvent"
             android:layout_width="match_parent" >
         </ListView>
     </TableRow>
@@ -23,11 +23,11 @@
     <TableRow >
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/textViewStem"
             android:text="" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/textViewLunarDate"
             android:layout_gravity="right"
             android:text="廿三" />
     </TableRow>
