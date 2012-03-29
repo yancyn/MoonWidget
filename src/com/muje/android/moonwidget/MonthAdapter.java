@@ -22,7 +22,7 @@ public class MonthAdapter extends BaseAdapter {
 	private int month;
 
 	/**
-	 * Default constructor.
+	 * Recommended constructor.
 	 * @param context
 	 * @param year Gregorian year value. ie. 2012.
 	 * @param month Gregorian month integer start from 1,2,3,..,12.
@@ -32,10 +32,19 @@ public class MonthAdapter extends BaseAdapter {
 		this.year = year;
 		this.month = month;
 	}
+	/**
+	 * Constructor for unit testing.
+	 * @param year Gregorian year value. ie. 2012.
+	 * @param month Gregorian month integer start from 1,2,3,..,12.
+	 */
+	public MonthAdapter(int year, int month) {
+		this.year = year;
+		this.month = month;
+	}
 
 	@Override
 	public int getCount() {
-		return getRowOfWeek()*7;
+		return getRowOfWeek(year,month)*7;
 	}
 
 	@Override
@@ -85,7 +94,7 @@ public class MonthAdapter extends BaseAdapter {
 	 * week then need to draw 6 rows otherwise only need 5 rows.
 	 * The week begin with Monday.
 	 */
-	private int getRowOfWeek() {
+	public int getRowOfWeek(int year,int month) {
 
 		int rowOfWeek = 5;// default
 		
@@ -108,7 +117,7 @@ public class MonthAdapter extends BaseAdapter {
 	 * Start from Sunday = 0, Monday = 1.. , Saturday = 6.
 	 * @return
 	 */
-	private int getFirstDayOfMonth() {
+	public int getFirstDayOfMonth() {
 		Date firstDay = new Date(year-1900,month-1,1);
 		return firstDay.getDay();
 	}
@@ -116,7 +125,7 @@ public class MonthAdapter extends BaseAdapter {
 	 * Return last date in a month ie. 31 or 30th.
 	 * @return
 	 */
-	private Date getLastDayOfMonth() {
+	public Date getLastDayOfMonth() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month, 1);
 		int totalDayInMonth = calendar.getActualMaximum(calendar.DAY_OF_MONTH);
