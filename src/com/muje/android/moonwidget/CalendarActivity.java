@@ -73,7 +73,7 @@ public class CalendarActivity extends Activity {
 
 		// arrange all day in a month view
 		gridViewCalendar = (GridView) findViewById(R.id.gridViewCalendar);
-		gridViewCalendar.setAdapter(new MonthAdapter(this,year-1900,month-1));
+		gridViewCalendar.setAdapter(new MonthAdapter(this,year,month));
 	}
 	
 	protected OnClickListener previousOnClick = new OnClickListener() {

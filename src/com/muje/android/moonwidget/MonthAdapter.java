@@ -12,7 +12,13 @@ import android.widget.TextView;
 
 public class MonthAdapter extends BaseAdapter {
 	private Context context;
+	/**
+	 * Gregorian year value.
+	 */
 	private int year;
+	/**
+	 * Gregorian month value.
+	 */
 	private int month;
 
 	/**
@@ -48,16 +54,26 @@ public class MonthAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup arg2) {
 
 		if (convertView == null) {
+			
 			// define how the view to be display in grid layout
 			LayoutInflater vi = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);// key
 			convertView = vi.inflate(R.layout.dayblock, null);
 			
-			//TODO: change the numbering of day in month
-			TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
-			textViewDate.setText(Integer.toString(position));
-			
-			TextView textViewLunarDate = (TextView)convertView.findViewById(R.id.textViewLunarDate);
-			textViewLunarDate.setText(Lunar.DAYS[position%Lunar.DAYS.length]);			
+			int i = getFirstDayOfMonth();
+			Date lastDay = getLastDayOfMonth();
+			if(i==0) i += 7;//because Sunday is start from index [6]
+			if(position >= i-1) {		
+				
+				//change the numbering of day in month
+				int date = (position-i+2)%(lastDay.getDate()+1);
+				if(date==0) date++;//date is count from 1 not 0
+				
+				TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
+				textViewDate.setText(Integer.toString(date));
+				
+				TextView textViewLunarDate = (TextView)convertView.findViewById(R.id.textViewLunarDate);
+				textViewLunarDate.setText(Lunar.DAYS[(date-1)%Lunar.DAYS.length]);
+			}
 		}
 
 		return convertView;
@@ -72,25 +88,12 @@ public class MonthAdapter extends BaseAdapter {
 	private int getRowOfWeek() {
 
 		int rowOfWeek = 5;// default
-
-//		Calendar today = Calendar.getInstance();
-//		// get first day in a month
-//		Calendar firstDay = Calendar.getInstance();
-//		firstDay.set(today.YEAR-1900, today.MONTH, 1);today.DATE
-//		// get last day in a month
-//		int lastDate = today.getActualMaximum(today.DAY_OF_MONTH);
-//		Calendar lastDay = Calendar.getInstance();
-//		lastDay.set(today.getTime().getYear()-1900, today.MONTH, lastDate);
-//		SimpleDateFormat format = new SimpleDateFormat("F");
-//		if(format.format(firstDay) == "0"
-//				|| format.format(lastDay) == "1")
-//			rowOfWeek++;
 		
 		//Date today = new Date();
 		Date firstDay = new Date(year-1900,month-1,1);
 		
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month, 1);
+		calendar.set(year, month-1, 1);//calendar.JANUARRY = 0
 		int totalDayInMonth = calendar.getActualMaximum(calendar.DAY_OF_MONTH);
 		Date lastDay = new Date(year-1900,month-1,totalDayInMonth);
 		
@@ -99,6 +102,25 @@ public class MonthAdapter extends BaseAdapter {
 			rowOfWeek ++;
 
 		return rowOfWeek;
+	}
+	/**
+	 * Return the weekday of 1st of month.
+	 * Start from Sunday = 0, Monday = 1.. , Saturday = 6.
+	 * @return
+	 */
+	private int getFirstDayOfMonth() {
+		Date firstDay = new Date(year-1900,month-1,1);
+		return firstDay.getDay();
+	}
+	/**
+	 * Return last date in a month ie. 31 or 30th.
+	 * @return
+	 */
+	private Date getLastDayOfMonth() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month, 1);
+		int totalDayInMonth = calendar.getActualMaximum(calendar.DAY_OF_MONTH);
+		return new Date(year-1900,month-1,totalDayInMonth);
 	}
 
 }

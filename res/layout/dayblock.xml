@@ -7,10 +7,7 @@
     android:layout_height="fill_parent">
 
     <TableRow >
-
-        <TextView
-            android:id="@+id/textViewDate"
-            android:text="Day" />
+        <TextView android:id="@+id/textViewDate" />
     </TableRow>
 
     <TableRow >
@@ -24,9 +21,7 @@
 
     <TableRow >
 
-        <TextView
-            android:id="@+id/textViewLunarDate"
-            android:text="廿三" />
+        <TextView android:id="@+id/textViewLunarDate" />
     </TableRow>
 
 </TableLayout>
