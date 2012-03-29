@@ -80,6 +80,7 @@ public class MonthAdapter extends BaseAdapter {
 				TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
 				textViewDate.setText(Integer.toString(date));
 				
+				//TODO: map lunar to gregorian date
 				TextView textViewLunarDate = (TextView)convertView.findViewById(R.id.textViewLunarDate);
 				textViewLunarDate.setText(Lunar.DAYS[(date-1)%Lunar.DAYS.length]);
 			}
@@ -127,7 +128,7 @@ public class MonthAdapter extends BaseAdapter {
 	 */
 	public Date getLastDayOfMonth() {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month, 1);
+		calendar.set(year, month-1, 1);//calendar.JANUARRY = 0
 		int totalDayInMonth = calendar.getActualMaximum(calendar.DAY_OF_MONTH);
 		return new Date(year-1900,month-1,totalDayInMonth);
 	}
