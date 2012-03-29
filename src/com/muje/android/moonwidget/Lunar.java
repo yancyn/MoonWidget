@@ -16,6 +16,18 @@ public class Lunar {
 			"初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六", "十七",
 			"十八", "十九", "廿日", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八",
 			"廿九", "卅日" };
+	// 10 celestial stems
+	private String[] stems = new String[] { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
+
+	// 12 earth branches
+	private String[] branches = new String[] { "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
+	
+	/**
+	 * Indicates 12 Chinese animal years. 
+	 * @author yeang-shing.then
+	 *
+	 */
+	public enum AnimalYear {MOUSE, OX, TIGER, RABBIT, DRAGON, SNAKE, HORSE, GOAT, MONKEY, ROOSTER, DOG, PIG} 
 
 	/**
 	 * Indicate 24 solar terms.
@@ -100,12 +112,6 @@ public class Lunar {
 		// Dictionary jiazi = new Dictionary<>();
 		ArrayList<String> temp = new ArrayList<String>();
 
-		// 10 celestial stems
-		String[] stems = new String[] { "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸" };
-
-		// 12 earth branches
-		String[] branches = new String[] { "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
-
 		// computing 60 花甲
 		for (int i = 0; i < 60; i++) {
 			String label = "";
@@ -122,6 +128,35 @@ public class Lunar {
 		// if the date value not pass lunar first month mean it still stick with
 		// last year
 		return jiazi[(year-4) % 60] + "年";
+	}
+	/**
+	 * Return the corresponding animal year of the lunar year set.
+	 * @return
+	 */
+	public AnimalYear getAnimalYear() {
+		
+		String chineseYear = getYearText();
+		String chineseBranch = chineseYear.substring(1,2);
+		int i=0;
+		int index = 0;
+		for(String branch: this.branches) {
+			if(chineseBranch.compareTo(branch) == 0) {
+				index = i;
+				break;
+			}
+			
+			i++;
+		}		
+		
+		i=0;//reset
+		for(AnimalYear animal: AnimalYear.values()) {
+			if(i==index) {
+				return animal;
+			}
+			i++;
+		}//end looping
+		
+		return AnimalYear.MOUSE;//default
 	}
 
 	/**

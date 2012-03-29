@@ -190,7 +190,7 @@ public class LunarCalendar {
 
 		return 0;
 	}
-
+	
 	/**
 	 * Get the next full moon or new moon.
 	 * 
