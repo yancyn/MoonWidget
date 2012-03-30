@@ -1,13 +1,13 @@
 ﻿package com.muje.android.moonwidget;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 public class MoonWidget extends AppWidgetProvider {
@@ -23,8 +23,7 @@ public class MoonWidget extends AppWidgetProvider {
 
 		try {
 			calendar.initialize(context);
-			Lunar lunar = calendar.getToday();
-			Log.d("DEBUG", "Today moon: " + lunar.toString());
+			Lunar lunar = calendar.getLunar(new Date());
 
 			String text = lunar.getYearText();
 			text += "\n" + lunar.getMonthText() + lunar.getDayText();

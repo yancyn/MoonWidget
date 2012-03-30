@@ -94,7 +94,7 @@ public class MonthAdapter extends BaseAdapter {
 				Date day = new Date(this.year-1900,this.month-1,date+1);
 				if(lunar == null) lunar = lunarCalendar.getLunar(day);
 				int lenghtOfLunarMonth = lunarCalendar.diffDays(lunarCalendar.getNextNewMoon().getSun(),
-						lunarCalendar.getPreviousNewMoon().getSun());				
+						lunarCalendar.getCurrentNewMoon().getSun());				
 				int index = ((lunar.getDay()+date-1))%Math.min(lenghtOfLunarMonth,Lunar.DAYS.length);
 				
 				TextView textViewLunarDate = (TextView)convertView.findViewById(R.id.textViewLunarDate);
