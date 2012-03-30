@@ -1,8 +1,11 @@
 package com.muje.android.moonwidget;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -73,7 +76,14 @@ public class CalendarActivity extends Activity {
 
 		// arrange all day in a month view
 		gridViewCalendar = (GridView) findViewById(R.id.gridViewCalendar);
-		gridViewCalendar.setAdapter(new MonthAdapter(this,year,month));
+		
+		try {
+			gridViewCalendar.setAdapter(new MonthAdapter(this,year,month));
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	protected OnClickListener previousOnClick = new OnClickListener() {

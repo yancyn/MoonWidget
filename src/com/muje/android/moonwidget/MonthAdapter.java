@@ -1,7 +1,10 @@
 package com.muje.android.moonwidget;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 
 public class MonthAdapter extends BaseAdapter {
 	private Context context;
+	private LunarCalendar lunarCalendar;
 	/**
 	 * Gregorian year value.
 	 */
@@ -19,18 +23,26 @@ public class MonthAdapter extends BaseAdapter {
 	/**
 	 * Gregorian month value.
 	 */
-	private int month;
+	private int month;	
+	/**
+	 * For holding purpose.
+	 */
+	private Lunar lunar;
 
 	/**
 	 * Recommended constructor.
 	 * @param context
 	 * @param year Gregorian year value. ie. 2012.
 	 * @param month Gregorian month integer start from 1,2,3,..,12.
+	 * @throws IOException 
+	 * @throws XmlPullParserException 
 	 */
-	public MonthAdapter(Context context,int year, int month) {
+	public MonthAdapter(Context context,int year, int month) throws XmlPullParserException, IOException {
 		this.context = context;
 		this.year = year;
 		this.month = month;
+		this.lunarCalendar = new LunarCalendar();
+		lunarCalendar.initialize(context);
 	}
 	/**
 	 * Constructor for unit testing.
@@ -74,15 +86,24 @@ public class MonthAdapter extends BaseAdapter {
 			if(position >= i-1) {		
 				
 				//change the numbering of day in month
-				int date = (position-i+2)%(lastDay.getDate()+1);
-				if(date==0) date++;//date is count from 1 not 0
-				
+				int date = (position-i+1)%lastDay.getDate();				
 				TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
-				textViewDate.setText(Integer.toString(date));
+				textViewDate.setText(Integer.toString(date+1));
 				
-				//TODO: map lunar to gregorian date
+				// map lunar to gregorian date				
+				Date day = new Date(this.year-1900,this.month-1,date+1);
+				if(lunar == null) lunar = lunarCalendar.getLunar(day);
+				int lenghtOfLunarMonth = lunarCalendar.diffDays(lunarCalendar.getNextNewMoon().getSun(),
+						lunarCalendar.getPreviousNewMoon().getSun());				
+				int index = ((lunar.getDay()+date-1))%Math.min(lenghtOfLunarMonth,Lunar.DAYS.length);
+				
 				TextView textViewLunarDate = (TextView)convertView.findViewById(R.id.textViewLunarDate);
-				textViewLunarDate.setText(Lunar.DAYS[(date-1)%Lunar.DAYS.length]);
+				if(index==0) {
+					Lunar nextMoon = lunarCalendar.getNextNewMoon();					
+					textViewLunarDate.setText(nextMoon.getMonthText());
+				} else {
+					textViewLunarDate.setText(Lunar.DAYS[index]);
+				}
 			}
 		}
 

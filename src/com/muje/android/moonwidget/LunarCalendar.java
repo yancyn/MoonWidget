@@ -26,6 +26,20 @@ public class LunarCalendar {
 	 * Today date in Gregorian value.
 	 */
 	private Date todaySun;
+	
+	private Lunar previousNewMoon;
+	/**
+	 * Return lunar date for previous new moon.
+	 * @see getLunar()
+	 */
+	public Lunar getPreviousNewMoon() {return this.previousNewMoon;}
+	
+	private Lunar nextNewMoon;
+	/**
+	 * Return lunar date for next new moon.
+	 * @see getLunar()
+	 */
+	public Lunar getNextNewMoon() {return this.nextNewMoon;}
 
 	/**
 	 * Lunar calendar manager class.
@@ -81,7 +95,7 @@ public class LunarCalendar {
 				}
 
 				// Log.d("DEBUG","Year: "+sun.subSequence(0, 4).toString());
-				// TODO: Date gregorian = new GregorianCalendar()
+				// TODO: change to Date gregorian = new GregorianCalendar()
 				Date gregorian = new Date(
 						year - 1900,
 						Integer.parseInt(sun.subSequence(5, 7).toString()) - 1,
@@ -123,7 +137,7 @@ public class LunarCalendar {
 					Log.d("DEBUG", "last 1st moon: " + last.toString());
 					days = diffDays(todaySun, last);
 					Log.d("DEBUG", "Diff days: " + days);
-					nextMonth = getNextLunarMonth(i);
+					nextMonth = getNextNewMoon(i).getMonth();
 					break;
 				}
 
@@ -146,6 +160,46 @@ public class LunarCalendar {
 		return today;
 	}
 	/**
+	 * Return lunar date.
+	 * 
+	 * @return
+	 */
+	public Lunar getLunar(Date gregorian) {
+
+		int days = 0;
+		Lunar last = null;
+		int nextMonth = 0;
+		for (int i = 0; i < this.data.size(); i++) {
+			Lunar entry = data.get(i);
+			if (entry.getSun().compareTo(gregorian) >= 0 && entry.getMonth() > 0) {
+				this.previousNewMoon = last;
+				Log.d("DEBUG", "last 1st moon: " + last.toString());
+				days = diffDays(gregorian, last.getSun());
+				Log.d("DEBUG", "Diff days: " + days);
+				
+				Lunar nextLunar = getNextNewMoon(i);
+				nextMonth = nextLunar.getMonth();
+				this.nextNewMoon = nextLunar;
+				break;
+			}
+
+			// only take valid Lunar value which has first of moon
+			if (entry.getMonth() > 0)
+				last = entry;
+		}
+		
+		Lunar result = new Lunar(last.getSun().getYear()+1900, last.getSun().getMonth() + 1, days + 1);// include today
+		result.setTerm(getTerm());
+
+		// check is a leap month or not
+		if (result.getMonth() == nextMonth) {
+			result.setLeapMonth();
+		}
+		
+		Log.d("INFO",gregorian.toLocaleString()+ " equals " +result.toString());
+		return result;
+	}
+	/**
 	 * Get solar term in database.
 	 * @return
 	 */
@@ -164,31 +218,28 @@ public class LunarCalendar {
 	/**
 	 * Compare two date values and return the different in days.
 	 * 
-	 * @param date1
-	 * @param date2
-	 * @return
+	 * @param date1 Last date
+	 * @param date2 Previous date
+	 * @return Positive integer if date1 bigger than date2 otherwise negative.
 	 */
-	private int diffDays(Date date1, Date date2) {
+	public int diffDays(Date date1, Date date2) {
 		long diffInSecs = (date1.getTime() - date2.getTime()) / 1000;
 		return (int) (diffInSecs / 86400);// one day has 86,400 seconds
 	}
-
+	
 	/**
-	 * Get the following lunar month.
-	 * 
-	 * @param index
-	 *            Index in data collection to start seeking.
-	 * @return Lunar month value.
+	 * Return the next new moon value.
+	 * @param start The index in data collection start to seek.
+	 * @return
 	 */
-	private int getNextLunarMonth(int index) {
-
-		for (int i = index; i < this.data.size(); i++) {
-			int month = this.data.get(i).getMonth();
-			if (month > 0)
-				return month;
+	private Lunar getNextNewMoon(int start) {
+		for (int i = start; i < this.data.size(); i++) {
+			Lunar newMoon = this.data.get(i);
+			if (newMoon.getMonth() > 0)
+				return newMoon;
 		}
 
-		return 0;
+		return new Lunar(0,1,1);
 	}
 	
 	/**
