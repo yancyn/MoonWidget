@@ -148,7 +148,7 @@ public class LunarCalendar {
 		}
 		
 		Lunar result = new Lunar(last.getSun().getYear()+1900, last.getSun().getMonth() + 1, days + 1);// include today
-		result.setTerm(getTerm());
+		result.setTerm(getTerm(gregorian));
 
 		// check is a leap month or not
 		int size = months.size();
@@ -163,18 +163,36 @@ public class LunarCalendar {
 	}
 	/**
 	 * Get solar term in database.
+	 * @param gregorian
 	 * @return
 	 */
-	private String getTerm() {
+	private String getTerm(Date gregorian) {
 		
 		String term = "";
 		for(Lunar entry: this.data){
-			if(todaySun.compareTo(entry.getSun())==0) {
+			if(gregorian.compareTo(entry.getSun())==0) {
 				return entry.getTerm();
 			}
 		}
 		
 		return term;		
+	}
+	/**
+	 * Return a collection of result by month.
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	public ArrayList<Lunar> getEvents(int year, int month) {
+		
+		ArrayList<Lunar> output = new ArrayList<Lunar>();
+		for(Lunar entry:this.data) {
+			if(entry.getSun().getYear()+1900 == year
+					&& entry.getSun().getMonth()+1 == month)
+				output.add(entry);
+		}
+		
+		return output;
 	}
 
 	/**

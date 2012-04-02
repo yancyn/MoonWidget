@@ -1,6 +1,7 @@
 package com.muje.android.moonwidget;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,6 +29,10 @@ public class MonthAdapter extends BaseAdapter {
 	 * For holding purpose.
 	 */
 	private Lunar lunar;
+	/**
+	 * Retrieving 24 stem, Buddhist, religion, & etc.
+	 */
+	private ArrayList<Lunar> events;
 
 	/**
 	 * Recommended constructor.
@@ -73,6 +78,10 @@ public class MonthAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
+		
+		if(events == null) {
+			events = lunarCalendar.getEvents(this.year,this.month);
+		}
 
 		if (convertView == null) {
 			
@@ -86,7 +95,8 @@ public class MonthAdapter extends BaseAdapter {
 			if(position >= i-1) {		
 				
 				//change the numbering of day in month
-				int date = (position-i+1)%lastDay.getDate();				
+				int date = (position-i+1)%lastDay.getDate();
+				Date selectedDate = new Date(year-1900,month-1,date+1);
 				TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
 				textViewDate.setText(Integer.toString(date+1));
 				
@@ -102,13 +112,27 @@ public class MonthAdapter extends BaseAdapter {
 					Lunar nextMoon = lunarCalendar.getNextNewMoon();					
 					textViewLunarDate.setText(nextMoon.getMonthText());
 				} else {
-					textViewLunarDate.setText(Lunar.DAYS[index]);
+					
+					String text = "";					
+					//get 24 stem
+					for(Lunar event:events) {
+						if(event.getSun().compareTo(selectedDate) == 0) {
+							text = event.getTerm();
+						}
+					}
+					
+					if(text == "") {					
+						textViewLunarDate.setText(Lunar.DAYS[index]);
+					} else {
+						textViewLunarDate.setText(text);
+					}
 				}
 			}
 		}
 
 		return convertView;
 	}
+	
 	
 	/*
 	 * Decide how many row need to draw for this month if first day of month

@@ -27,7 +27,7 @@ public class Lunar {
 	 * @author yeang-shing.then
 	 *
 	 */
-	public enum AnimalYear {MOUSE, OX, TIGER, RABBIT, DRAGON, SNAKE, HORSE, GOAT, MONKEY, ROOSTER, DOG, PIG} 
+	public enum AnimalYear {RAT, OX, TIGER, RABBIT, DRAGON, SNAKE, HORSE, GOAT, MONKEY, ROOSTER, DOG, PIG} 
 
 	/**
 	 * Indicate 24 solar terms.
@@ -125,6 +125,7 @@ public class Lunar {
 
 		// 1804 is the first 甲子 and so on...
 		// TODO: tune buffer for Chinese Year
+		// TODO: what about the Chinese year at bc?
 		// if the date value not pass lunar first month mean it still stick with
 		// last year
 		return jiazi[(year-4) % 60] + "年";
@@ -156,7 +157,7 @@ public class Lunar {
 			i++;
 		}//end looping
 		
-		return AnimalYear.MOUSE;//default
+		return AnimalYear.RAT;//default
 	}
 
 	/**
