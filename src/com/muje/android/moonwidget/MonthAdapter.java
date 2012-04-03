@@ -17,6 +17,11 @@ import android.widget.TextView;
 public class MonthAdapter extends BaseAdapter {
 	private Context context;
 	private LunarCalendar lunarCalendar;
+	private boolean isPreviousMonth;
+	/**
+	 * Stopper to prevent highlight same date twice.
+	 */
+	private boolean isNextMonth;
 	/**
 	 * Gregorian year value.
 	 */
@@ -46,7 +51,10 @@ public class MonthAdapter extends BaseAdapter {
 		this.context = context;
 		this.year = year;
 		this.month = month;
-		this.lunarCalendar = new LunarCalendar();
+		this.isPreviousMonth = false;
+		this.isNextMonth = false;
+		
+		lunarCalendar = new LunarCalendar();
 		lunarCalendar.initialize(context);
 	}
 	/**
@@ -96,12 +104,21 @@ public class MonthAdapter extends BaseAdapter {
 				
 				//change the numbering of day in month
 				int date = (position-i+1)%lastDay.getDate();
-				Date selectedDate = new Date(year-1900,month-1,date+1);
+				Date day = new Date(this.year-1900,this.month-1,date+1);
 				TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
 				textViewDate.setText(Integer.toString(date+1));
 				
+				//highlight today in grey background
+				Date today = new Date(new Date().getYear(),
+						new Date().getMonth(),
+						new Date().getDate());
+				if(!isNextMonth && day.compareTo(today) == 0) {
+					convertView.setBackgroundResource(R.drawable.todayview);
+					isNextMonth = true;
+				}
+				
+				
 				// map lunar to gregorian date				
-				Date day = new Date(this.year-1900,this.month-1,date+1);
 				if(lunar == null) lunar = lunarCalendar.getLunar(day);
 				int lenghtOfLunarMonth = lunarCalendar.diffDays(lunarCalendar.getNextNewMoon().getSun(),
 						lunarCalendar.getCurrentNewMoon().getSun());				
@@ -116,7 +133,7 @@ public class MonthAdapter extends BaseAdapter {
 					String text = "";					
 					//get 24 stem
 					for(Lunar event:events) {
-						if(event.getSun().compareTo(selectedDate) == 0) {
+						if(event.getSun().compareTo(day) == 0) {
 							text = event.getTerm();
 						}
 					}
