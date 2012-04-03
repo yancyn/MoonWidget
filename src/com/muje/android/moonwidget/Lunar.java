@@ -3,6 +3,8 @@
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.util.Log;
+
 public class Lunar {
 
 	private int year;
@@ -151,9 +153,7 @@ public class Lunar {
 		
 		i=0;//reset
 		for(AnimalYear animal: AnimalYear.values()) {
-			if(i==index) {
-				return animal;
-			}
+			if(i==index) return animal;
 			i++;
 		}//end looping
 		
@@ -171,8 +171,7 @@ public class Lunar {
 		String[] months = new String[] { "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二" };
 		if (this.month > 0) {
 			output = months[this.month - 1] + output;
-			if (this.isLeapMonth)
-				output = "闰" + output;
+			if (this.isLeapMonth) output = "闰" + output;
 		}
 
 		return output;
@@ -205,6 +204,7 @@ public class Lunar {
 		if (this.day == 0) {
 			return DAYS[0];
 		} else if (this.day > DAYS.length) {
+			Log.e("ERROR","get lunar day: "+this.day);
 			return DAYS[0];
 		} else {
 			return DAYS[this.day - 1];

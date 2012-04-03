@@ -17,11 +17,10 @@ import android.widget.TextView;
 public class MonthAdapter extends BaseAdapter {
 	private Context context;
 	private LunarCalendar lunarCalendar;
-	private boolean isPreviousMonth;
 	/**
 	 * Stopper to prevent highlight same date twice.
 	 */
-	private boolean isNextMonth;
+	private int firstDayCounter;
 	/**
 	 * Gregorian year value.
 	 */
@@ -51,8 +50,7 @@ public class MonthAdapter extends BaseAdapter {
 		this.context = context;
 		this.year = year;
 		this.month = month;
-		this.isPreviousMonth = false;
-		this.isNextMonth = false;
+		this.firstDayCounter = 0;
 		
 		lunarCalendar = new LunarCalendar();
 		lunarCalendar.initialize(context);
@@ -105,6 +103,12 @@ public class MonthAdapter extends BaseAdapter {
 				//change the numbering of day in month
 				int date = (position-i+1)%lastDay.getDate();
 				Date day = new Date(this.year-1900,this.month-1,date+1);
+				
+				//not to draw next month
+				if(day.getDate() == 1) firstDayCounter ++;
+				if(firstDayCounter > 1) return convertView;
+				
+				//draw gregorian date
 				TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
 				textViewDate.setText(Integer.toString(date+1));
 				
@@ -112,37 +116,37 @@ public class MonthAdapter extends BaseAdapter {
 				Date today = new Date(new Date().getYear(),
 						new Date().getMonth(),
 						new Date().getDate());
-				if(!isNextMonth && day.compareTo(today) == 0) {
+				if(firstDayCounter == 1 && day.compareTo(today) == 0) {
 					convertView.setBackgroundResource(R.drawable.todayview);
-					isNextMonth = true;
 				}
 				
 				
 				// map lunar to gregorian date				
 				if(lunar == null) lunar = lunarCalendar.getLunar(day);
-				int lenghtOfLunarMonth = lunarCalendar.diffDays(lunarCalendar.getNextNewMoon().getSun(),
+				int lenghtOfLunarMonth = lunarCalendar.diffDays(
+						lunarCalendar.getNextNewMoon().getSun(),
 						lunarCalendar.getCurrentNewMoon().getSun());				
-				int index = ((lunar.getDay()+date-1))%Math.min(lenghtOfLunarMonth,Lunar.DAYS.length);
+				int index = ((lunar.getDay()+date-1))%Math.min(lenghtOfLunarMonth,Lunar.DAYS.length);				
+				
+				//get 24 stem
+				String text = "";				
+				for(Lunar event:events) {
+					if(event.getSun().compareTo(day) == 0) {
+						text = event.getTerm();
+					}
+				}
 				
 				TextView textViewLunarDate = (TextView)convertView.findViewById(R.id.textViewLunarDate);
-				if(index==0) {
-					Lunar nextMoon = lunarCalendar.getNextNewMoon();					
-					textViewLunarDate.setText(nextMoon.getMonthText());
+				if(text != "") {					
+					textViewLunarDate.setText(text);
 				} else {
-					
-					String text = "";					
-					//get 24 stem
-					for(Lunar event:events) {
-						if(event.getSun().compareTo(day) == 0) {
-							text = event.getTerm();
-						}
-					}
-					
-					if(text == "") {					
-						textViewLunarDate.setText(Lunar.DAYS[index]);
+					if(index==0) {
+						Lunar nextMoon = lunarCalendar.getNextNewMoon();					
+						textViewLunarDate.setText(nextMoon.getMonthText());
 					} else {
-						textViewLunarDate.setText(text);
+						textViewLunarDate.setText(Lunar.DAYS[index]);
 					}
+					
 				}
 			}
 		}
