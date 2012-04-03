@@ -5,20 +5,29 @@ import java.util.Date;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 public class MoonWidget extends AppWidgetProvider {
 
-	private RemoteViews remoteViews;
+	private static String LAUNCH = "LAUNCH";
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
-		this.remoteViews = new RemoteViews(context.getPackageName(), R.layout.main);
+		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.main);
+
+		// add onClick for the Moon
+		Intent i = new Intent(context, MoonWidget.class);
+		i.setAction(LAUNCH);
+		PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
+		remoteViews.setOnClickPendingIntent(R.id.moonImage, pi);
+
 		LunarCalendar calendar = new LunarCalendar();
 
 		try {
@@ -29,17 +38,30 @@ public class MoonWidget extends AppWidgetProvider {
 			text += "\n" + lunar.getMonthText() + lunar.getDayText();
 			if (lunar.getTerm().length() > 0)
 				text += "\n" + lunar.getTerm();
-			this.remoteViews.setTextViewText(R.id.todayText, text);
-			this.remoteViews.setImageViewResource(R.id.moonImage, lunar.getImageId());
+			remoteViews.setTextViewText(R.id.todayText, text);
+			remoteViews.setImageViewResource(R.id.moonImage, lunar.getImageId());
 			// this.remoteViews.setTextViewText(R.id.todayRemark,"");//calendar.getToday().getYear());;
 			// this.remoteViews.setTextViewText(R.id.nextMoon,"");
 
 			// this must call ensure the widget take the latest changes
-			appWidgetManager.updateAppWidget(appWidgetIds, this.remoteViews);
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+
+		appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
+	}
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+
+		super.onReceive(context, intent);
+		if(intent.getAction().equals(LAUNCH)) {
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setClassName("com.muje.android.moonwidget", "com.muje.android.moonwidget.CalendarActivity");
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(i);
 		}
 	}
 }
