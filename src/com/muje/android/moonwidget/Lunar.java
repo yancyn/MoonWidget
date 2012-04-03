@@ -172,7 +172,7 @@ public class Lunar {
 		if (this.month > 0) {
 			output = months[this.month - 1] + output;
 			if (this.isLeapMonth)
-				output = "润" + output;
+				output = "闰" + output;
 		}
 
 		return output;

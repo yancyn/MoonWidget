@@ -146,17 +146,19 @@ public class LunarCalendar {
 				months.add(entry);
 			}
 		}
-		
-		Lunar result = new Lunar(last.getSun().getYear()+1900, last.getSun().getMonth() + 1, days + 1);// include today
-		result.setTerm(getTerm(gregorian));
 
+		Lunar result = null;
 		// check is a leap month or not
 		int size = months.size();
 		Lunar lastMonth = months.get(size-1);
 		Lunar lastTwoMonth = months.get(size-2);
 		if(lastMonth.getMonth() == lastTwoMonth.getMonth()) {
+			result = new Lunar(last.getSun().getYear()+1900, last.getSun().getMonth(), days + 1);// include today
 			result.setLeapMonth();
+		} else {
+			result = new Lunar(last.getSun().getYear()+1900, last.getSun().getMonth() + 1, days + 1);// include today
 		}
+		result.setTerm(getTerm(gregorian));
 		
 		Log.i("LunarCalendar.getLunar",gregorian.toLocaleString()+ " equals " +result.toString());
 		return result;
