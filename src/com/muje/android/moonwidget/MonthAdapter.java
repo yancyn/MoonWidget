@@ -123,6 +123,8 @@ public class MonthAdapter extends BaseAdapter {
 				
 				// map lunar to gregorian date				
 				if(lunar == null) lunar = lunarCalendar.getLunar(day);
+				if(lunar == null) return convertView;
+				
 				int lenghtOfLunarMonth = lunarCalendar.diffDays(
 						lunarCalendar.getNextNewMoon().getSun(),
 						lunarCalendar.getCurrentNewMoon().getSun());				
