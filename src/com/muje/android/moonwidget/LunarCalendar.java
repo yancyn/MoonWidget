@@ -152,17 +152,20 @@ public class LunarCalendar {
 		
 		// check is a leap month or not
 		int size = months.size();
-		if(size==0) return result;
-		
-		Lunar lastMonth = months.get(size-1);
-		Lunar lastTwoMonth = months.get(size-2);
-		if(lastMonth.getMonth() == lastTwoMonth.getMonth()) {
+		if(size==0) return result;		
+		if(size < 2) {
 			result = new Lunar(last.getSunYear(), last.getMonth(), days + 1);// include today
-			result.setLeapMonth();
 		} else {
-			result = new Lunar(last.getSunYear(), last.getMonth(), days + 1);// include today
+			Lunar lastMonth = months.get(size-1);
+			Lunar lastTwoMonth = months.get(size-2);
+			if(lastMonth.getMonth() == lastTwoMonth.getMonth()) {
+				result = new Lunar(last.getSunYear(), last.getMonth(), days + 1);// include today
+				result.setLeapMonth();
+			} else {
+				result = new Lunar(last.getSunYear(), last.getMonth(), days + 1);// include today
+			}
+			result.setTerm(getTerm(gregorian));
 		}
-		result.setTerm(getTerm(gregorian));
 		
 		Log.i("LunarCalendar.getLunar",gregorian.toLocaleString()+ " equals " +result.toString());
 		return result;

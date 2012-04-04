@@ -62,8 +62,7 @@ public class CalendarActivity extends Activity {
 		//display Chinese Year
 		Lunar lunar = new Lunar(year,month,1);
 		TextView textViewYear = (TextView)findViewById(R.id.textViewYear);
-		textViewYear.setText(lunar.getYearText());
-		
+		textViewYear.setText(lunar.getYearText());		
 		
 		// display this month as text
 		Date date = new Date(year-1900,month-1,1);
@@ -75,8 +74,7 @@ public class CalendarActivity extends Activity {
 		textViewMonth.setTag(date);
 
 		// arrange all day in a month view
-		gridViewCalendar = (GridView) findViewById(R.id.gridViewCalendar);
-		
+		gridViewCalendar = (GridView) findViewById(R.id.gridViewCalendar);		
 		try {
 			gridViewCalendar.setAdapter(new MonthAdapter(this,year,month));
 		} catch (XmlPullParserException e) {
