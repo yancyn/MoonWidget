@@ -44,4 +44,39 @@
 	<lunar sun="2013-01-05" term="小寒" />
 	<lunar sun="2013-01-12" month="12" />
 	<lunar sun="2013-01-20" term="大寒" />
+	<lunar sun="2013-02-04" term="立春" />
+	<lunar sun="2013-02-10" month="1" />
+	<lunar sun="2013-02-18" term="雨水" />
+	<lunar sun="2013-03-05" term="惊蛰" />
+	<lunar sun="2013-03-12" month="2" />
+	<lunar sun="2013-03-20" term="春分" />
+	<lunar sun="2013-04-04" term="清明" />
+	<lunar sun="2013-04-10" month="3" />
+	<lunar sun="2013-04-20" term="谷雨" />
+	<lunar sun="2013-05-05" term="立夏" />
+	<lunar sun="2013-05-10" month="4" />
+	<lunar sun="2013-05-21" term="小满" />
+	<lunar sun="2013-06-05" term="芒种" />
+	<lunar sun="2013-06-08" month="5" />
+	<lunar sun="2013-06-21" term="夏至" />
+	<lunar sun="2013-07-07" term="小暑" />
+	<lunar sun="2013-07-08" month="6" />
+	<lunar sun="2013-07-22" term="大暑" />
+	<lunar sun="2013-08-07" month="7" />
+	<lunar sun="2013-08-07" term="立秋" />
+	<lunar sun="2013-08-23" term="处暑" />
+	<lunar sun="2013-09-05" month="8" />
+	<lunar sun="2013-09-07" term="白露" />
+	<lunar sun="2013-09-23" term="秋分" />
+	<lunar sun="2013-10-05" month="9" />
+	<lunar sun="2013-10-08" term="寒露" />
+	<lunar sun="2013-10-23" term="霜降" />
+	<lunar sun="2013-11-03" month="10" />
+	<lunar sun="2013-11-07" term="立冬" />
+	<lunar sun="2013-11-22" term="小雪" />
+	<lunar sun="2013-12-03" month="11" />
+	<lunar sun="2013-12-07" term="大雪" />
+	<lunar sun="2013-12-22" term="冬至" />
+	<lunar sun="2014-01-05" term="小寒" />
+	<lunar sun="2014-01-20" term="大寒" />
 </calendar>
