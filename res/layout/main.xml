@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="right"
-        android:text="十一月十五" />
+        android:text="" />
 
     <ImageButton
         android:id="@+id/moonImage"

@@ -20,8 +20,8 @@
     </TableRow>
 
     <TableRow >
-
-        <TextView android:id="@+id/textViewLunarDate" />
+        <TextView android:id="@+id/textViewLunarDate"
+            android:textColor="#000000" />
     </TableRow>
 
 </TableLayout>
