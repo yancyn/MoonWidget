@@ -8,6 +8,7 @@ import java.util.Date;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 /**
  * Lunar calendar view activity.
@@ -62,7 +64,12 @@ public class CalendarActivity extends Activity {
 		//display Chinese Year
 		Lunar lunar = new Lunar(year,month,1);
 		TextView textViewYear = (TextView)findViewById(R.id.textViewYear);
-		textViewYear.setText(lunar.getYearText());		
+		textViewYear.setText(lunar.getYearText());
+		
+		// set animal avatar
+		ImageView imageView = (ImageView)findViewById(R.id.imageViewAnimal);
+		Drawable resource = getResources().getDrawable(lunar.getAnimalYearId());
+		imageView.setImageDrawable(resource);
 		
 		// display this month as text
 		Date date = new Date(year-1900,month-1,1);

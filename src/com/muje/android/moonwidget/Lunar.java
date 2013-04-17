@@ -132,6 +132,7 @@ public class Lunar {
 		// last year
 		return jiazi[(year-4) % 60] + "年";
 	}
+	
 	/**
 	 * Return the corresponding animal year of the lunar year set.
 	 * @return
@@ -158,6 +159,19 @@ public class Lunar {
 		}//end looping
 		
 		return AnimalYear.RAT;//default
+	}
+	
+	/**
+	 * Get the corresponding animal year image.
+	 * @return
+	 */
+	public int getAnimalYearId() {
+		Integer[] images = new Integer[] {
+				R.drawable.z01, R.drawable.z02, R.drawable.z03,
+				R.drawable.z04, R.drawable.z05, R.drawable.z06,
+				R.drawable.z07, R.drawable.z08, R.drawable.z09,
+				R.drawable.z10, R.drawable.z11, R.drawable.z12};
+		return images[(this.year-4)%12];
 	}
 
 	/**
