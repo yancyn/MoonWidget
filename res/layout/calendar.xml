@@ -8,7 +8,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="#FFBB33">
 
         <Button
             android:id="@+id/buttonPrevious"
@@ -30,7 +31,6 @@
                 android:layout_alignParentLeft="true"
                 android:src="@null"
                 android:layout_marginLeft="4px"
-                android:maxHeight="30dp"
                 android:adjustViewBounds="true" />
 
             <TextView
