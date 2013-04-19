@@ -97,11 +97,11 @@ public class MonthAdapter extends BaseAdapter {
 			
 			int i = getFirstDayOfMonth();
 			Date lastDay = getLastDayOfMonth();
-			if(i==0) i += 7;//because Sunday is start from index [6]
-			if(position >= i-1) {		
+			//if(i==0) i += 1;//because Sunday is start from index [0]
+			if(position >= i) {		
 				
 				//change the numbering of day in month
-				int date = (position-i+1)%lastDay.getDate();
+				int date = (position-i)%lastDay.getDate();
 				Date day = new Date(this.year-1900,this.month-1,date+1);
 				
 				//not to draw next month

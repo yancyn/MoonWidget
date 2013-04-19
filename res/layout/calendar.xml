@@ -15,8 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:textColor="#000000"
-            android:text="&lt;" />
+            android:background="@drawable/previous" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:src="@null"
+                android:layout_marginLeft="4px"
                 android:maxHeight="30dp"
                 android:adjustViewBounds="true" />
 
@@ -58,8 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textColor="#000000"
-            android:text="&gt;" />
+            android:background="@drawable/next" />
     </RelativeLayout>
 
 	<!--  TODO: change to GridView with programmically compose -->
@@ -73,8 +72,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="#000000"
-            android:text="Mon" />
+            android:text="Sun" />
         
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:text="Mon" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,13 +115,6 @@
             android:layout_weight="1"
             android:textColor="#000000"
             android:text="Sat" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="#000000"
-            android:text="Sun" />
     </LinearLayout>
 
     <GridView
