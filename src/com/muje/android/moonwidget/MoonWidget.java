@@ -38,14 +38,13 @@ public class MoonWidget extends AppWidgetProvider {
 
 			String text = lunar.getYearText();
 			text += "\n" + lunar.getMonthText() + lunar.getDayText();
-			if (lunar.getTerm().length() > 0)
+			if (lunar.getTerm().length() > 0) {
 				text += "\n" + lunar.getTerm();
+			} else if(lunar.getEvents().size() > 0) {
+				text += "\n" + lunar.getEvents().get(0).getDescription();
+			}
 			remoteViews.setTextViewText(R.id.todayText, text);
 			remoteViews.setImageViewResource(R.id.moonImage, lunar.getImageId());
-			// this.remoteViews.setTextViewText(R.id.todayRemark,"");//calendar.getToday().getYear());;
-			// this.remoteViews.setTextViewText(R.id.nextMoon,"");
-
-			// this must call ensure the widget take the latest changes
 		} catch (XmlPullParserException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

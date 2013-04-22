@@ -18,6 +18,7 @@ public class LunarCalendar {
 	 * @see res/xml/moon.xml
 	 */
 	private ArrayList<Lunar> data;
+	private AppointmentManager appointmentManager;
 	/**
 	 * Today lunar object.
 	 */
@@ -116,6 +117,10 @@ public class LunarCalendar {
 
 		// ensure sort correctly for loop in getToday()
 		Collections.sort(this.data, new LunarComparator());
+		
+		//initialize personal events in database
+		appointmentManager = new AppointmentManager();
+		appointmentManager.initialize(context);
 	}
 	/**
 	 * Return lunar date.
@@ -168,6 +173,7 @@ public class LunarCalendar {
 		}
 		
 		Log.i("LunarCalendar.getLunar",gregorian.toLocaleString()+ " equals " +result.toString());
+		result.setEvents(getEvents(result));
 		return result;
 	}
 	/**
@@ -202,6 +208,60 @@ public class LunarCalendar {
 		}
 		
 		return output;
+	}
+	/**
+	 * Return a collection of personal events.
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	private ArrayList<Appointment> getEvents(Lunar lunar) {
+		ArrayList<Appointment> events = new ArrayList<Appointment>();
+		for(Appointment appointment: appointmentManager.Appointments) {
+			
+			// yearly case
+			if(appointment.getType() == 0) {
+				
+				// repeat every year
+				if(appointment.getRepeat() == 1) {
+					if(appointment.getMonth() == lunar.getMonth()) {							
+						if(appointment.getDay() == lunar.getDay()) {
+							events.add(appointment);
+						}
+					
+						// specific for eve case
+						if(appointment.getDay() == 0) {
+							Date tomorrow = new Date(lunar.getSun().getTime()+1000*60*60*24);
+							Lunar tomorrowLunar = getLunar(tomorrow);
+							if(lunar.getDay() > tomorrowLunar.getDay()) {
+								events.add(appointment);
+							}
+						}
+					}
+				} else {
+					
+					// repeat in every x year
+					if((lunar.getSunYear()-appointment.getYear()) % appointment.getRepeat() == 0) {
+						if(appointment.getMonth() == lunar.getMonth()) {							
+							if(appointment.getDay() == lunar.getDay()) {
+								events.add(appointment);
+							}
+						
+							// specific for eve case
+							if(appointment.getDay() == 0) {
+								Date tomorrow = new Date(lunar.getSun().getTime()+1000*60*60*24);
+								Lunar tomorrowLunar = getLunar(tomorrow);
+								if(lunar.getDay() > tomorrowLunar.getDay()) {
+									events.add(appointment);
+								}
+							}
+						}
+					}
+				}
+			}
+		}//end loops
+		
+		return events;
 	}
 
 	/**

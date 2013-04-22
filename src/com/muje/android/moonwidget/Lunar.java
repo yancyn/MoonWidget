@@ -12,6 +12,7 @@ public class Lunar {
 	private int day;
 	private Date sun;
 	private boolean isLeapMonth;
+	private ArrayList<Appointment> events;
 
 	// there is no 31st day in a lunar month
 	final static String[] DAYS = new String[] { "初一", "初二", "初三", "初四", "初五", "初六",
@@ -47,6 +48,7 @@ public class Lunar {
 		this.month = month;
 		this.day = day;
 		this.term = "";
+		this.events = new ArrayList<Appointment>();
 	}
 
 	/**
@@ -312,5 +314,11 @@ public class Lunar {
 	 */
 	public String getTerm() {
 		return this.term;
+	}
+	public void setEvents(ArrayList<Appointment> events) {
+		this.events = events;
+	}
+	public ArrayList<Appointment> getEvents() {
+		return this.events;
 	}
 }

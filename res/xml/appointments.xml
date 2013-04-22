@@ -14,6 +14,6 @@
 	<lunar repeat="1" type="0" year="0" month="11" day="19" desc="观音诞" />
 	<lunar repeat="1" type="0" year="0" month="12" day="8" desc="腊八" />
 	<lunar repeat="1" type="0" year="0" month="12" day="23" desc="送灶神" />
-	<lunar repeat="1" type="0" year="0" month="12" day="0" desc="接灶神" />
 	<lunar repeat="1" type="0" year="0" month="12" day="0" desc="除夕" />
+	<lunar repeat="1" type="0" year="0" month="12" day="0" desc="接灶神" />
 </calendar>
