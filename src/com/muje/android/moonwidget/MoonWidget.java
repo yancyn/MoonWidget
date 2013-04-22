@@ -35,6 +35,7 @@ public class MoonWidget extends AppWidgetProvider {
 			Date now = new Date();
 			Date dateOnly = new Date(now.getYear(),now.getMonth(),now.getDate());
 			Lunar lunar = calendar.getLunar(dateOnly);
+			lunar.setEvents(calendar.getEvents(lunar));
 
 			String text = lunar.getYearText();
 			text += "\n" + lunar.getMonthText() + lunar.getDayText();

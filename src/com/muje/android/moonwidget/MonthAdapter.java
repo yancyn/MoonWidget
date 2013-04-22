@@ -19,7 +19,7 @@ import android.widget.TextView;
 public class MonthAdapter extends BaseAdapter {
 	private Context context;
 	private LunarCalendar lunarCalendar;
-	private AppointmentManager calendarManager;
+	private AppointmentManager appointmentManager;
 	
 	/**
 	 * Stopper to prevent highlight same date twice.
@@ -38,7 +38,7 @@ public class MonthAdapter extends BaseAdapter {
 	 */
 	private Lunar lunar;
 	/**
-	 * Retrieving 24 stem, Buddhist, religion, & etc.
+	 * Retrieving 24 stems, Buddhist, religion, & etc.
 	 */
 	private ArrayList<Lunar> events;
 
@@ -61,8 +61,8 @@ public class MonthAdapter extends BaseAdapter {
 		lunarCalendar.initialize(context);
 		
 		// load personal lunar appointment
-		calendarManager = new AppointmentManager();
-		calendarManager.initialize(context);
+		appointmentManager = new AppointmentManager();
+		appointmentManager.initialize(context);
 	}
 	/**
 	 * Constructor for unit testing.
@@ -131,6 +131,7 @@ public class MonthAdapter extends BaseAdapter {
 				
 				// map lunar to gregorian date				
 				lunar = lunarCalendar.getLunar(day);
+				lunar.setEvents(lunarCalendar.getEvents(lunar));
 				if(lunar == null) return convertView;
 				
 				//get 24 stem
@@ -176,7 +177,7 @@ public class MonthAdapter extends BaseAdapter {
 	 * Decide how many row need to draw for this month if first day of month
 	 * fall at last day of the week or last day in a month fall at first day of
 	 * week then need to draw 6 rows otherwise only need 5 rows.
-	 * The week begin with Monday.
+	 * The week begin with Sunday.
 	 */
 	public int getRowOfWeek(int year,int month) {
 
@@ -191,7 +192,7 @@ public class MonthAdapter extends BaseAdapter {
 		Date lastDay = new Date(year-1900,month-1,totalDayInMonth);
 		
 		// sunday = 0, monday = 1, ... , saturday = 6
-		if(firstDay.getDay() == 0 || lastDay.getDay() == 1)
+		if(firstDay.getDay() == 6 || lastDay.getDay() == 0)
 			rowOfWeek ++;
 
 		return rowOfWeek;

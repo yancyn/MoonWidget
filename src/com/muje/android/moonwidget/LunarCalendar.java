@@ -173,7 +173,7 @@ public class LunarCalendar {
 		}
 		
 		Log.i("LunarCalendar.getLunar",gregorian.toLocaleString()+ " equals " +result.toString());
-		result.setEvents(getEvents(result));
+		result.setSun(gregorian);
 		return result;
 	}
 	/**
@@ -215,7 +215,7 @@ public class LunarCalendar {
 	 * @param month
 	 * @return
 	 */
-	private ArrayList<Appointment> getEvents(Lunar lunar) {
+	public ArrayList<Appointment> getEvents(Lunar lunar) {
 		ArrayList<Appointment> events = new ArrayList<Appointment>();
 		for(Appointment appointment: appointmentManager.Appointments) {
 			
