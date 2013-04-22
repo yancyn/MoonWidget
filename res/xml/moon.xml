@@ -2,6 +2,7 @@
 <!-- @see http://zh.wikipedia.org/wiki/%E8%8A%82%E6%B0%94 -->
 <!-- @see http://wenwen.soso.com/z/q173266684.htm -->
 <!-- @see http://www.hko.gov.hk/gts/time/calendar/pdf/2014.pdf -->
+<!-- @todo: formula to calculate 24 solar term http://baike.baidu.com.cn/view/25702.htm -->
 <calendar>
 	<lunar sun="2011-11-08" month="11" />
 	<lunar sun="2011-12-15" month="12" />

@@ -68,53 +68,67 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/sun"
+            android:text="Sun"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#000000"
-            android:text="Sun" />
+            android:textColor="#000000" />
         
         <TextView
+            android:id="@+id/mon"
+            android:text="Mon"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#000000"
-            android:text="Mon" />
+            android:textColor="#000000" />
 
         <TextView
+            android:id="@+id/tue"
+            android:text="Tue"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#000000"
-            android:text="Tue" />
+            android:textColor="#000000" />
 
         <TextView
+            android:id="@+id/wed"
+            android:text="Wed"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#000000"
-            android:text="Wed" />
+            android:textColor="#000000" />
 
         <TextView
+            android:id="@+id/thu"
+            android:text="Thu"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#000000"
-            android:text="Thu" />
+            android:textColor="#000000" />
 
         <TextView
+            android:id="@+id/fri"
+            android:text="Fri"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#000000"
-            android:text="Fri" />
+            android:textColor="#000000" />
 
         <TextView
+            android:id="@+id/sat"
+            android:text="Sat"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#000000"
-            android:text="Sat" />
+            android:textColor="#000000" />
     </LinearLayout>
 
     <GridView

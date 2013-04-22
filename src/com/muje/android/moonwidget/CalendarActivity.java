@@ -10,6 +10,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -79,6 +80,16 @@ public class CalendarActivity extends Activity {
 		textViewMonth.setText(format.format(date));
 		//for next & previous button recognize what is current displayed month
 		textViewMonth.setTag(date);
+		
+		// set weekday header in local language
+		int i = 0;
+		int[] headerIds = new int[]{R.id.sun, R.id.mon, R.id.tue, R.id.wed, R.id.thu, R.id.fri, R.id.sat};
+		for(int id: headerIds) {
+			TextView header = (TextView)findViewById(id);
+			header.setText(DateUtils.getDayOfWeekString(i+1, 3));
+			i++;
+		}
+		
 
 		// arrange all day in a month view
 		gridViewCalendar = (GridView) findViewById(R.id.gridViewCalendar);		
