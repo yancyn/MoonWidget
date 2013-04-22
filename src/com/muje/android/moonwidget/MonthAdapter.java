@@ -134,61 +134,14 @@ public class MonthAdapter extends BaseAdapter {
 				if(lunar == null) return convertView;
 				
 				//get 24 stem
-				String text = "";				
-				for(Lunar event:events) {
-					if(event.getSun().compareTo(day) == 0) {
-						text = event.getTerm();
-					}
-				}
+				String text = "";
+				text = lunar.getTerm();
 				
 				// get personal lunar event
 				String desc = "";
-				for(Appointment appointment:calendarManager.Appointments) {
-					// yearly case
-					if(appointment.getType() == 0) {
-						
-						// repeat every year
-						if(appointment.getRepeat() == 1) {
-							if(appointment.getMonth() == lunar.getMonth()) {							
-								if(appointment.getDay() == lunar.getDay()) {
-									if(desc.length() > 0) desc += "\n";
-									desc += appointment.getDescription();
-								}
-							
-								// specific for eve case
-								if(appointment.getDay() == 0) {
-									Date tomorrow = new Date(day.getTime()+1000*60*60*24);
-									Lunar tomorrowLunar = lunarCalendar.getLunar(tomorrow);
-									//Log.d("DEBUG","Today lunar: "+lunar.toString()+" Tomorrow lunar: "+tomorrowLunar.toString());
-									if(lunar.getDay() > tomorrowLunar.getDay()) {
-										if(desc.length() > 0) desc += "\n";
-										desc += appointment.getDescription();
-									}
-								}
-							}
-						} else {
-							// repeat in every x year
-							if((lunar.getSunYear()-appointment.getYear()) % appointment.getRepeat() == 0) {
-								if(appointment.getMonth() == lunar.getMonth()) {							
-									if(appointment.getDay() == lunar.getDay()) {
-										if(desc.length() > 0) desc += "\n";
-										desc += appointment.getDescription();
-									}
-								
-									// specific for eve case
-									if(appointment.getDay() == 0) {
-										Date tomorrow = new Date(day.getTime()+1000*60*60*24);
-										Lunar tomorrowLunar = lunarCalendar.getLunar(tomorrow);
-										//Log.d("DEBUG","Today lunar: "+lunar.toString()+" Tomorrow lunar: "+tomorrowLunar.toString());
-										if(lunar.getDay() > tomorrowLunar.getDay()) {
-											if(desc.length() > 0) desc += "\n";
-											desc += appointment.getDescription();
-										}
-									}
-								}
-							}
-						}
-					}
+				for(Appointment appointment:lunar.getEvents()) {
+					if(desc.length()>0) desc += "\n";
+					desc += appointment.getDescription();
 				}//end loops
 				
 				if(desc != "") {
