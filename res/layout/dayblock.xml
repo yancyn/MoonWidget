@@ -11,11 +11,8 @@
     </TableRow>
 
     <TableRow>
-        <ListView
-            android:id="@+id/listViewEvent"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent" >
-        </ListView>
+        <TextView android:id="@+id/textViewLunarEvent"
+            android:textColor="#FFFFFF"/>
     </TableRow>
 
     <TableRow>

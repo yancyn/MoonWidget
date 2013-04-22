@@ -38,13 +38,9 @@ public class Lunar {
 
 	/**
 	 * Default constructor for lunar date.
-	 * 
-	 * @param year
-	 *            Gregorian year.
-	 * @param month
-	 *            Lunar month.
-	 * @param day
-	 *            Lunar day.
+	 * @param year Gregorian year.
+	 * @param month Lunar month.
+	 * @param day Lunar day.
 	 */
 	public Lunar(int year, int month, int day) {
 		this.year = year;// % 100;
@@ -55,7 +51,6 @@ public class Lunar {
 
 	/**
 	 * Constructor for setting up solar term only without lunar month value.
-	 * 
 	 * @param year
 	 * @param term
 	 */
@@ -78,7 +73,6 @@ public class Lunar {
 
 	/**
 	 * Return sun Gregorian in year value.
-	 * 
 	 * @return
 	 */
 	public int getSunYear() {
@@ -87,20 +81,50 @@ public class Lunar {
 
 	/**
 	 * Return lunar month value.
-	 * 
 	 * @return
 	 */
 	public int getMonth() {
 		return this.month;
 	}
+	/**
+	 * Set lunar month.
+	 * @param month
+	 */
+	public void setMonth(int month) {
+		this.month = month;
+	}
+	/**
+	 * Add lunar month.
+	 * @param month
+	 */
+	public void addMonth(int month) {
+		this.month += month;
+		if(this.month > 12) {
+			this.year += (this.month-this.month%12)/12;
+			this.month = this.month%12;
+		}
+	}
 
 	/**
 	 * Return lunar day value.
-	 * 
 	 * @return
 	 */
 	public int getDay() {
 		return this.day;
+	}
+	/**
+	 * Set lunar day.
+	 * @param day
+	 */
+	public void setDay(int day) {
+		this.day = day;
+	}
+	/**
+	 * Add lunar day.
+	 * @param day
+	 */
+	public void addDay(int day) {
+		this.day += day;
 	}
 
 	/**

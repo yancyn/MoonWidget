@@ -5,13 +5,13 @@
     android:versionName="0.13.4.16">
 
     <uses-sdk android:minSdkVersion="8" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@drawable/m14"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar">
+        
         <activity
             android:label="@string/app_name"
             android:name=".CalendarActivity">
@@ -27,7 +27,6 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider" />

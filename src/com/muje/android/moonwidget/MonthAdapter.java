@@ -7,7 +7,9 @@ import java.util.Date;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.R.color;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 public class MonthAdapter extends BaseAdapter {
 	private Context context;
 	private LunarCalendar lunarCalendar;
+	private AppointmentManager calendarManager;
+	
 	/**
 	 * Stopper to prevent highlight same date twice.
 	 */
@@ -52,8 +56,13 @@ public class MonthAdapter extends BaseAdapter {
 		this.month = month;
 		this.firstDayCounter = 0;
 		
+		// load default system lunar calendar
 		lunarCalendar = new LunarCalendar();
 		lunarCalendar.initialize(context);
+		
+		// load personal lunar appointment
+		calendarManager = new AppointmentManager();
+		calendarManager.initialize(context);
 	}
 	/**
 	 * Constructor for unit testing.
@@ -97,38 +106,32 @@ public class MonthAdapter extends BaseAdapter {
 			
 			int i = getFirstDayOfMonth();
 			Date lastDay = getLastDayOfMonth();
-			//if(i==0) i += 1;//because Sunday is start from index [0]
 			if(position >= i) {		
 				
 				//change the numbering of day in month
 				int date = (position-i)%lastDay.getDate();
+				
+				// current date value of block
 				Date day = new Date(this.year-1900,this.month-1,date+1);
 				
 				//not to draw next month
 				if(day.getDate() == 1) firstDayCounter ++;
 				if(firstDayCounter > 1) return convertView;
 				
-				//draw gregorian date
+				// draw gregorian date
 				TextView textViewDate = (TextView)convertView.findViewById(R.id.textViewDate);
-				textViewDate.setText(Integer.toString(date+1));
+				textViewDate.setText(Integer.toString(day.getDate()));//Integer.toString(date+1));
+				Log.d("DEBUG", "getView("+position+"): "+day.toString());
 				
-				//highlight today in grey background
-				Date today = new Date(new Date().getYear(),
-						new Date().getMonth(),
-						new Date().getDate());
+				// highlight today in grey background
+				Date today = new Date(new Date().getYear(), new Date().getMonth(), new Date().getDate());
 				if(firstDayCounter == 1 && day.compareTo(today) == 0) {
 					convertView.setBackgroundResource(R.drawable.todayview);
-				}
-				
+				}				
 				
 				// map lunar to gregorian date				
-				if(lunar == null) lunar = lunarCalendar.getLunar(day);
+				lunar = lunarCalendar.getLunar(day);
 				if(lunar == null) return convertView;
-				
-				int lenghtOfLunarMonth = lunarCalendar.diffDays(
-						lunarCalendar.getNextNewMoon().getSun(),
-						lunarCalendar.getCurrentNewMoon().getSun());				
-				int index = ((lunar.getDay()+date-1))%Math.min(lenghtOfLunarMonth,Lunar.DAYS.length);				
 				
 				//get 24 stem
 				String text = "";				
@@ -138,18 +141,50 @@ public class MonthAdapter extends BaseAdapter {
 					}
 				}
 				
+				// get personal lunar event
+				String desc = "";
+				for(Appointment appointment:calendarManager.Appointments) {
+					if(appointment.getYear() == 0) {						
+						if(appointment.getMonth() == lunar.getMonth()) {							
+							if(appointment.getDay() == lunar.getDay()) {
+								if(desc.length() > 0) desc += "\n";
+								desc += appointment.getDescription();
+							}
+						
+							// specific for eve case
+							if(appointment.getDay() == 0) {
+								Date tomorrow = new Date(day.getTime()+1000*60*60*24);
+								Lunar tomorrowLunar = lunarCalendar.getLunar(tomorrow);
+								//Log.d("DEBUG","Today lunar: "+lunar.toString()+" Tomorrow lunar: "+tomorrowLunar.toString());
+								if(lunar.getDay() > tomorrowLunar.getDay()) {
+									if(desc.length() > 0) desc += "\n";
+									desc += appointment.getDescription();
+								}
+							}
+						}
+					}
+				}//end loops
+				if(desc != "") {
+					//show personal lunar appointment
+					TextView textViewLunarEvent = (TextView)convertView.findViewById(R.id.textViewLunarEvent);
+					textViewLunarEvent.setText(desc);
+					// FAIL: textViewLunarEvent.setBackgroundColor(color.holo_orange_dark);
+					textViewLunarEvent.setBackgroundResource(R.color.highlight);
+				}
+				
+				// Start set text into interface				
 				TextView textViewLunarDate = (TextView)convertView.findViewById(R.id.textViewLunarDate);
 				if(text != "") {					
 					textViewLunarDate.setText(text);
-				} else {
-					if(index==0) {
-						Lunar nextMoon = lunarCalendar.getNextNewMoon();					
-						textViewLunarDate.setText(nextMoon.getMonthText());
+				} else {					
+					//show lunar date
+					if(lunar.getDay() == 1) {
+						textViewLunarDate.setText(lunar.getMonthText());
 					} else {
-						textViewLunarDate.setText(Lunar.DAYS[index]);
-					}
-					
+						textViewLunarDate.setText(lunar.getDayText());
+					}					
 				}
+				Log.d("DEBUG",lunar.toString());
 			}
 		}
 
